@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planner - Aplikasi Perencanaan Pernikahan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>💍 Wedding Planner</h1>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-page="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </button>
+                <button class="nav-btn" data-page="moodboard">
+                    <span class="icon">🎨</span> Moodboard & Warna
+                </button>
+                <button class="nav-btn" data-page="budgeting">
+                    <span class="icon">💰</span> Budgeting
+                </button>
+                <button class="nav-btn" data-page="vendors">
+                    <span class="icon">👥</span> Vendor List
+                </button>
+                <button class="nav-btn" data-page="todo">
+                    <span class="icon">✓</span> To-Do List
+                </button>
+                <button class="nav-btn" data-page="guests">
+                    <span class="icon">👫</span> Tamu & Undangan
+                </button>
+                <button class="nav-btn" data-page="rundown">
+                    <span class="icon">⏱️</span> Rundown Acara
+                </button>
+                <button class="nav-btn" data-page="settings">
+                    <span class="icon">⚙️</span> Pengaturan
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <section id="dashboard" class="page active">
+                <h2>Dashboard Pernikahan</h2>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>Informasi Pernikahan</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Nama Pengantin Pria</label>
+                                <p id="groomName">-</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Nama Pengantin Wanita</label>
+                                <p id="brideName">-</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Tanggal Pernikahan</label>
+                                <p id="weddingDate">-</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Lokasi</label>
+                                <p id="weddingLocation">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Statistik Pernikahan</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-number" id="totalBudget">0</span>
+                                <span class="stat-label">Total Budget</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number" id="totalSpent">0</span>
+                                <span class="stat-label">Sudah Dikeluarkan</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number" id="totalGuests">0</span>
+                                <span class="stat-label">Total Tamu</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number" id="tasksCompleted">0</span>
+                                <span class="stat-label">Task Selesai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Progress Persiapan</h3>
+                        <div class="progress-item">
+                            <label>Keseluruhan</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="overallProgress" style="width: 0%"></div>
+                            </div>
+                            <span id="progressPercent">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Tema Warna</h3>
+                        <div class="color-preview">
+                            <div class="color-box" id="primaryColor"></div>
+                            <div class="color-box" id="secondaryColor"></div>
+                            <div class="color-box" id="accentColor"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Moodboard Page -->
+            <section id="moodboard" class="page">
+                <h2>Moodboard & Warna Tema</h2>
+                <div class="moodboard-container">
+                    <div class="card">
+                        <h3>Pilih Warna Tema</h3>
+                        <div class="color-picker-grid">
+                            <div class="color-input-group">
+                                <label>Warna Utama</label>
+                                <input type="color" id="primaryColorInput" value="#FF69B4">
+                                <span id="primaryColorCode">#FF69B4</span>
+                            </div>
+                            <div class="color-input-group">
+                                <label>Warna Sekunder</label>
+                                <input type="color" id="secondaryColorInput" value="#FFB6C1">
+                                <span id="secondaryColorCode">#FFB6C1</span>
+                            </div>
+                            <div class="color-input-group">
+                                <label>Warna Aksen</label>
+                                <input type="color" id="accentColorInput" value="#FFD700">
+                                <span id="accentColorCode">#FFD700</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Moodboard</h3>
+                        <div class="moodboard-grid" id="moodboardGrid">
+                            <!-- Moodboard items akan ditambahkan di sini -->
+                        </div>
+                        <button class="btn btn-primary" onclick="addMoodboardItem()">+ Tambah Moodboard</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budgeting Page -->
+            <section id="budgeting" class="page">
+                <h2>Budgeting & Tracking Biaya</h2>
+                <div class="budgeting-container">
+                    <div class="card">
+                        <h3>Tambah Kategori Biaya</h3>
+                        <form id="budgetForm" class="form-grid">
+                            <input type="text" placeholder="Nama Kategori" id="categoryName" required>
+                            <input type="number" placeholder="Budget" id="budgetAmount" required>
+                            <input type="number" placeholder="Biaya Aktual" id="actualAmount" required>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Ringkasan Budget</h3>
+                        <div class="budget-summary">
+                            <div class="summary-item">
+                                <span>Total Budget</span>
+                                <span id="summaryBudget">Rp 0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Total Pengeluaran</span>
+                                <span id="summarySpent">Rp 0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Sisa Budget</span>
+                                <span id="summaryRemaining">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Detail Kategori</h3>
+                        <table class="budget-table">
+                            <thead>
+                                <tr>
+                                    <th>Kategori</th>
+                                    <th>Budget</th>
+                                    <th>Pengeluaran</th>
+                                    <th>Sisa</th>
+                                    <th>%</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="budgetTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vendors Page -->
+            <section id="vendors" class="page">
+                <h2>Vendor List</h2>
+                <div class="vendors-container">
+                    <div class="card">
+                        <h3>Tambah Vendor</h3>
+                        <form id="vendorForm" class="form-grid">
+                            <input type="text" placeholder="Nama Vendor" id="vendorName" required>
+                            <select id="vendorCategory" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="Fotografi">Fotografi</option>
+                                <option value="Videografi">Videografi</option>
+                                <option value="Catering">Catering</option>
+                                <option value="Dekorasi">Dekorasi</option>
+                                <option value="Makeup">Makeup</option>
+                                <option value="Venue">Venue</option>
+                                <option value="Undangan">Undangan</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <input type="tel" placeholder="Nomor Telepon" id="vendorPhone" required>
+                            <input type="email" placeholder="Email" id="vendorEmail">
+                            <input type="number" placeholder="Biaya" id="vendorCost">
+                            <button type="submit" class="btn btn-primary">Tambah Vendor</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Daftar Vendor</h3>
+                        <div id="vendorList" class="vendor-list">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- To-Do List Page -->
+            <section id="todo" class="page">
+                <h2>To-Do List & Timeline</h2>
+                <div class="todo-container">
+                    <div class="card">
+                        <h3>Tambah Task</h3>
+                        <form id="todoForm" class="form-grid">
+                            <input type="text" placeholder="Deskripsi Task" id="todoDesc" required>
+                            <select id="todoCategory" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="Persiapan">Persiapan</option>
+                                <option value="Vendor">Vendor</option>
+                                <option value="Tamu">Tamu</option>
+                                <option value="Dekorasi">Dekorasi</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <input type="date" id="todoDueDate" required>
+                            <select id="todoPriority" required>
+                                <option value="Rendah">Rendah</option>
+                                <option value="Sedang">Sedang</option>
+                                <option value="Tinggi">Tinggi</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Tambah Task</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Daftar Task</h3>
+                        <div id="todoList" class="todo-list">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Guests Page -->
+            <section id="guests" class="page">
+                <h2>Tamu & Undangan</h2>
+                <div class="guests-container">
+                    <div class="card">
+                        <h3>Tambah Tamu</h3>
+                        <form id="guestForm" class="form-grid">
+                            <input type="text" placeholder="Nama Tamu" id="guestName" required>
+                            <select id="guestSide" required>
+                                <option value="">Pilih Pihak</option>
+                                <option value="Pria">Pihak Pria</option>
+                                <option value="Wanita">Pihak Wanita</option>
+                                <option value="Keluarga">Keluarga Besar</option>
+                            </select>
+                            <input type="tel" placeholder="Nomor Telepon" id="guestPhone">
+                            <input type="email" placeholder="Email" id="guestEmail">
+                            <select id="guestStatus" required>
+                                <option value="Belum Diundang">Belum Diundang</option>
+                                <option value="Diundang">Diundang</option>
+                                <option value="Konfirmasi">Konfirmasi</option>
+                                <option value="Hadir">Hadir</option>
+                                <option value="Tidak Hadir">Tidak Hadir</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Tambah Tamu</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Statistik Tamu</h3>
+                        <div class="guest-stats">
+                            <div class="stat-item">
+                                <span>Total Tamu</span>
+                                <span id="totalGuestCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Sudah Konfirmasi</span>
+                                <span id="confirmedCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Belum Konfirmasi</span>
+                                <span id="pendingCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Daftar Tamu</h3>
+                        <table class="guest-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Pihak</th>
+                                    <th>Telepon</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="guestTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rundown Page -->
+            <section id="rundown" class="page">
+                <h2>Rundown Acara</h2>
+                <div class="rundown-container">
+                    <div class="card">
+                        <h3>Tambah Acara</h3>
+                        <form id="rundownForm" class="form-grid">
+                            <input type="text" placeholder="Nama Acara" id="rundownName" required>
+                            <input type="time" id="rundownTime" required>
+                            <input type="text" placeholder="Lokasi" id="rundownLocation" required>
+                            <input type="text" placeholder="PIC/Penanggung Jawab" id="rundownPIC" required>
+                            <textarea placeholder="Catatan" id="rundownNotes"></textarea>
+                            <button type="submit" class="btn btn-primary">Tambah Acara</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Timeline Acara</h3>
+                        <div id="rundownList" class="rundown-list">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Page -->
+            <section id="settings" class="page">
+                <h2>Pengaturan</h2>
+                <div class="settings-container">
+                    <div class="card">
+                        <h3>Informasi Pernikahan</h3>
+                        <form id="settingsForm" class="form-grid">
+                            <input type="text" placeholder="Nama Pengantin Pria" id="settingGroom" required>
+                            <input type="text" placeholder="Nama Pengantin Wanita" id="settingBride" required>
+                            <input type="date" id="settingDate" required>
+                            <input type="text" placeholder="Lokasi Pernikahan" id="settingLocation" required>
+                            <input type="number" placeholder="Total Budget" id="settingBudget" required>
+                            <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Data Management</h3>
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="exportData()">📥 Export Data</button>
+                            <button class="btn btn-secondary" onclick="importData()">📤 Import Data</button>
+                            <button class="btn btn-danger" onclick="clearAllData()">🗑️ Hapus Semua Data</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

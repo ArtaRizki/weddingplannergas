@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planner - Print Template</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .print-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #FF69B4;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #FF69B4;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            color: #FF69B4;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #FFB6C1;
+            padding-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .info-item label {
+            display: block;
+            font-weight: 600;
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th {
+            background: #FF69B4;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+            font-size: 13px;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            margin-right: 10px;
+            font-size: 16px;
+            color: #FF69B4;
+        }
+
+        .color-preview {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .color-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #FF69B4;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .timeline-item:not(:last-child):after {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 17px;
+            width: 2px;
+            height: 20px;
+            background: #FFB6C1;
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: #FF69B4;
+            font-size: 13px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .timeline-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #FFB6C1;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .print-container {
+                max-width: 100%;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+
+        .button-group {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-print {
+            background: #FF69B4;
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: #ff4da6;
+        }
+
+        .btn-download {
+            background: #FFB6C1;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #ffa3c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-container">
+        <div class="button-group no-print">
+            <button class="btn btn-print" onclick="window.print()">🖨️ Print</button>
+            <button class="btn btn-download" onclick="downloadPDF()">📥 Download PDF</button>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>💍 Wedding Planner</h1>
+            <p>Laporan Perencanaan Pernikahan</p>
+            <p id="printDate"></p>
+        </div>
+
+        <!-- Wedding Info -->
+        <div class="section">
+            <h2>Informasi Pernikahan</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Pengantin Pria</label>
+                    <p id="printGroom">-</p>
+                </div>
+                <div class="info-item">
+                    <label>Pengantin Wanita</label>
+                    <p id="printBride">-</p>
+                </div>
+                <div class="info-item">
+                    <label>Tanggal Pernikahan</label>
+                    <p id="printDate2">-</p>
+                </div>
+                <div class="info-item">
+                    <label>Lokasi</label>
+                    <p id="printLocation">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="section">
+            <h2>Statistik Pernikahan</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number" id="printBudget">0</span>
+                    <span class="stat-label">Total Budget</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="printSpent">0</span>
+                    <span class="stat-label">Pengeluaran</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="printGuests">0</span>
+                    <span class="stat-label">Total Tamu</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="printTasks">0</span>
+                    <span class="stat-label">Task Selesai</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Theme -->
+        <div class="section">
+            <h2>Tema Warna</h2>
+            <div class="color-preview">
+                <div class="color-box" id="printColorPrimary">Utama</div>
+                <div class="color-box" id="printColorSecondary">Sekunder</div>
+                <div class="color-box" id="printColorAccent">Aksen</div>
+            </div>
+        </div>
+
+        <!-- Budget Summary -->
+        <div class="section">
+            <h2>Ringkasan Budget</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Budget</th>
+                        <th>Pengeluaran</th>
+                        <th>Sisa</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody id="printBudgetTable">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vendor List -->
+        <div class="section">
+            <h2>Daftar Vendor</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Vendor</th>
+                        <th>Kategori</th>
+                        <th>Telepon</th>
+                        <th>Email</th>
+                        <th>Biaya</th>
+                    </tr>
+                </thead>
+                <tbody id="printVendorTable">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- To-Do List -->
+        <div class="section">
+            <h2>Daftar Task</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Kategori</th>
+                        <th>Deadline</th>
+                        <th>Prioritas</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="printTodoTable">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Guest List -->
+        <div class="section">
+            <h2>Daftar Tamu</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Pihak</th>
+                        <th>Telepon</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="printGuestTable">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Rundown -->
+        <div class="section">
+            <h2>Rundown Acara</h2>
+            <div class="timeline" id="printRundownTimeline">
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Laporan ini dibuat menggunakan Wedding Planner</p>
+            <p>Dicetak pada: <span id="printFooterDate"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Load data from localStorage
+        const appData = JSON.parse(localStorage.getItem('weddingPlannerData')) || {};
+
+        // Format functions
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(value);
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateStr).toLocaleDateString('id-ID', options);
+        }
+
+        // Populate data
+        function populateData() {
+            const now = new Date().toLocaleDateString('id-ID', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Header info
+            document.getElementById('printDate').textContent = `Dibuat: ${now}`;
+            document.getElementById('printFooterDate').textContent = now;
+
+            // Wedding info
+            document.getElementById('printGroom').textContent = appData.settings?.groomName || '-';
+            document.getElementById('printBride').textContent = appData.settings?.brideName || '-';
+            document.getElementById('printDate2').textContent = formatDate(appData.settings?.weddingDate);
+            document.getElementById('printLocation').textContent = appData.settings?.weddingLocation || '-';
+
+            // Statistics
+            const totalBudget = (appData.budgets || []).reduce((sum, b) => sum + (b.budget || 0), 0);
+            const totalSpent = (appData.budgets || []).reduce((sum, b) => sum + (b.actual || 0), 0);
+            const completedTasks = (appData.todos || []).filter(t => t.completed).length;
+
+            document.getElementById('printBudget').textContent = formatCurrency(totalBudget);
+            document.getElementById('printSpent').textContent = formatCurrency(totalSpent);
+            document.getElementById('printGuests').textContent = appData.guests?.length || 0;
+            document.getElementById('printTasks').textContent = completedTasks;
+
+            // Colors
+            const primaryColor = appData.settings?.primaryColor || '#FF69B4';
+            const secondaryColor = appData.settings?.secondaryColor || '#FFB6C1';
+            const accentColor = appData.settings?.accentColor || '#FFD700';
+
+            const primaryBox = document.getElementById('printColorPrimary');
+            const secondaryBox = document.getElementById('printColorSecondary');
+            const accentBox = document.getElementById('printColorAccent');
+
+            primaryBox.style.backgroundColor = primaryColor;
+            secondaryBox.style.backgroundColor = secondaryColor;
+            accentBox.style.backgroundColor = accentColor;
+
+            // Budget table
+            const budgetTable = document.getElementById('printBudgetTable');
+            budgetTable.innerHTML = '';
+            (appData.budgets || []).forEach(budget => {
+                const percentage = budget.budget > 0 ? (budget.actual / budget.budget) * 100 : 0;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${budget.category}</td>
+                    <td>${formatCurrency(budget.budget)}</td>
+                    <td>${formatCurrency(budget.actual)}</td>
+                    <td>${formatCurrency(budget.budget - budget.actual)}</td>
+                    <td>${Math.round(percentage)}%</td>
+                `;
+                budgetTable.appendChild(row);
+            });
+
+            // Vendor table
+            const vendorTable = document.getElementById('printVendorTable');
+            vendorTable.innerHTML = '';
+            (appData.vendors || []).forEach(vendor => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${vendor.name}</td>
+                    <td>${vendor.category}</td>
+                    <td>${vendor.phone}</td>
+                    <td>${vendor.email || '-'}</td>
+                    <td>${vendor.cost > 0 ? formatCurrency(vendor.cost) : '-'}</td>
+                `;
+                vendorTable.appendChild(row);
+            });
+
+            // Todo table
+            const todoTable = document.getElementById('printTodoTable');
+            todoTable.innerHTML = '';
+            (appData.todos || []).forEach(todo => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${todo.description}</td>
+                    <td>${todo.category}</td>
+                    <td>${formatDate(todo.dueDate)}</td>
+                    <td>${todo.priority}</td>
+                    <td>${todo.completed ? '✓ Selesai' : 'Pending'}</td>
+                `;
+                todoTable.appendChild(row);
+            });
+
+            // Guest table
+            const guestTable = document.getElementById('printGuestTable');
+            guestTable.innerHTML = '';
+            (appData.guests || []).forEach(guest => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${guest.name}</td>
+                    <td>${guest.side}</td>
+                    <td>${guest.phone}</td>
+                    <td>${guest.email || '-'}</td>
+                    <td>${guest.status}</td>
+                `;
+                guestTable.appendChild(row);
+            });
+
+            // Rundown timeline
+            const timeline = document.getElementById('printRundownTimeline');
+            timeline.innerHTML = '';
+            const sortedRundowns = [...(appData.rundowns || [])].sort((a, b) => a.time.localeCompare(b.time));
+            sortedRundowns.forEach(rundown => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.innerHTML = `
+                    <div class="timeline-time">${rundown.time}</div>
+                    <div class="timeline-title">${rundown.name}</div>
+                    <div class="timeline-desc">📍 ${rundown.location} | 👤 ${rundown.pic}</div>
+                    ${rundown.notes ? `<div class="timeline-desc">📝 ${rundown.notes}</div>` : ''}
+                `;
+                timeline.appendChild(item);
+            });
+        }
+
+        function downloadPDF() {
+            alert('Untuk download PDF, gunakan fitur Print dan pilih "Save as PDF" di browser Anda.');
+            window.print();
+        }
+
+        // Initialize
+        populateData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+{
+  "settings": {
+    "groomName": "Budi Santoso",
+    "brideName": "Siti Nurhaliza",
+    "weddingDate": "2024-06-15",
+    "weddingLocation": "Ballroom Grand Hotel, Jakarta",
+    "totalBudget": 500000000,
+    "primaryColor": "#FF69B4",
+    "secondaryColor": "#FFB6C1",
+    "accentColor": "#FFD700"
+  },
+  "budgets": [
+    {
+      "id": 1,
+      "category": "Venue",
+      "budget": 100000000,
+      "actual": 95000000
+    },
+    {
+      "id": 2,
+      "category": "Catering",
+      "budget": 150000000,
+      "actual": 145000000
+    },
+    {
+      "id": 3,
+      "category": "Fotografi & Videografi",
+      "budget": 80000000,
+      "actual": 80000000
+    },
+    {
+      "id": 4,
+      "category": "Dekorasi",
+      "budget": 70000000,
+      "actual": 65000000
+    },
+    {
+      "id": 5,
+      "category": "Makeup & Hair",
+      "budget": 30000000,
+      "actual": 28000000
+    },
+    {
+      "id": 6,
+      "category": "Undangan",
+      "budget": 15000000,
+      "actual": 14000000
+    },
+    {
+      "id": 7,
+      "category": "Honeymoon",
+      "budget": 50000000,
+      "actual": 0
+    }
+  ],
+  "vendors": [
+    {
+      "id": 1,
+      "name": "Studio Foto Jaya",
+      "category": "Fotografi",
+      "phone": "081234567890",
+      "email": "info@studiofotojaya.com",
+      "cost": 50000000,
+      "status": "Aktif"
+    },
+    {
+      "id": 2,
+      "name": "Catering Mewah",
+      "category": "Catering",
+      "phone": "082345678901",
+      "email": "order@cateringmewah.com",
+      "cost": 145000000,
+      "status": "Aktif"
+    },
+    {
+      "id": 3,
+      "name": "Dekorasi Elegan",
+      "category": "Dekorasi",
+      "phone": "083456789012",
+      "email": "design@dekorasielegan.com",
+      "cost": 65000000,
+      "status": "Aktif"
+    },
+    {
+      "id": 4,
+      "name": "Makeup Artist Profesional",
+      "category": "Makeup",
+      "phone": "084567890123",
+      "email": "booking@makeupprofi.com",
+      "cost": 28000000,
+      "status": "Aktif"
+    },
+    {
+      "id": 5,
+      "name": "Grand Hotel Jakarta",
+      "category": "Venue",
+      "phone": "085678901234",
+      "email": "events@grandhotel.com",
+      "cost": 95000000,
+      "status": "Aktif"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "description": "Tentukan tanggal dan lokasi pernikahan",
+      "category": "Persiapan",
+      "dueDate": "2024-01-15",
+      "priority": "Tinggi",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "description": "Booking venue",
+      "category": "Vendor",
+      "dueDate": "2024-02-01",
+      "priority": "Tinggi",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "description": "Pilih dan booking fotografer",
+      "category": "Vendor",
+      "dueDate": "2024-02-15",
+      "priority": "Tinggi",
+      "completed": true
+    },
+    {
+      "id": 4,
+      "description": "Tentukan menu catering",
+      "category": "Vendor",
+      "dueDate": "2024-03-01",
+      "priority": "Sedang",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "description": "Desain dan cetak undangan",
+      "category": "Persiapan",
+      "dueDate": "2024-03-15",
+      "priority": "Sedang",
+      "completed": false
+    },
+    {
+      "id": 6,
+      "description": "Kirim undangan ke tamu",
+      "category": "Tamu",
+      "dueDate": "2024-04-01",
+      "priority": "Tinggi",
+      "completed": false
+    },
+    {
+      "id": 7,
+      "description": "Konfirmasi kehadiran tamu",
+      "category": "Tamu",
+      "dueDate": "2024-05-01",
+      "priority": "Tinggi",
+      "completed": false
+    },
+    {
+      "id": 8,
+      "description": "Fitting gaun pengantin",
+      "category": "Persiapan",
+      "dueDate": "2024-05-15",
+      "priority": "Sedang",
+      "completed": false
+    },
+    {
+      "id": 9,
+      "description": "Rehearsal pernikahan",
+      "category": "Persiapan",
+      "dueDate": "2024-06-10",
+      "priority": "Tinggi",
+      "completed": false
+    },
+    {
+      "id": 10,
+      "description": "Persiapan hari H",
+      "category": "Persiapan",
+      "dueDate": "2024-06-14",
+      "priority": "Tinggi",
+      "completed": false
+    }
+  ],
+  "guests": [
+    {
+      "id": 1,
+      "name": "Ayah Budi",
+      "side": "Pria",
+      "phone": "081111111111",
+      "email": "ayah@email.com",
+      "status": "Konfirmasi"
+    },
+    {
+      "id": 2,
+      "name": "Ibu Budi",
+      "side": "Pria",
+      "phone": "081111111112",
+      "email": "ibu@email.com",
+      "status": "Konfirmasi"
+    },
+    {
+      "id": 3,
+      "name": "Ayah Siti",
+      "side": "Wanita",
+      "phone": "082222222222",
+      "email": "ayahsiti@email.com",
+      "status": "Konfirmasi"
+    },
+    {
+      "id": 4,
+      "name": "Ibu Siti",
+      "side": "Wanita",
+      "phone": "082222222223",
+      "email": "ibusiti@email.com",
+      "status": "Konfirmasi"
+    },
+    {
+      "id": 5,
+      "name": "Kakak Budi",
+      "side": "Pria",
+      "phone": "081111111113",
+      "email": "kakak@email.com",
+      "status": "Konfirmasi"
+    },
+    {
+      "id": 6,
+      "name": "Adik Siti",
+      "side": "Wanita",
+      "phone": "082222222224",
+      "email": "adik@email.com",
+      "status": "Diundang"
+    },
+    {
+      "id": 7,
+      "name": "Paman Budi",
+      "side": "Pria",
+      "phone": "081111111114",
+      "email": "paman@email.com",
+      "status": "Belum Diundang"
+    },
+    {
+      "id": 8,
+      "name": "Bibi Siti",
+      "side": "Wanita",
+      "phone": "082222222225",
+      "email": "bibi@email.com",
+      "status": "Belum Diundang"
+    }
+  ],
+  "rundowns": [
+    {
+      "id": 1,
+      "name": "Persiapan Pengantin",
+      "time": "06:00",
+      "location": "Hotel - Kamar Pengantin",
+      "pic": "Makeup Artist",
+      "notes": "Makeup dan hair styling untuk pengantin"
+    },
+    {
+      "id": 2,
+      "name": "Tamu Mulai Berdatangan",
+      "time": "08:00",
+      "location": "Ballroom Grand Hotel",
+      "pic": "MC & Usher",
+      "notes": "Sambut tamu dan arahkan ke tempat duduk"
+    },
+    {
+      "id": 3,
+      "name": "Pembukaan Acara",
+      "time": "09:00",
+      "location": "Ballroom Grand Hotel",
+      "pic": "MC",
+      "notes": "Pembukaan dan sambutan dari keluarga"
+    },
+    {
+      "id": 4,
+      "name": "Prosesi Pengantin",
+      "time": "09:30",
+      "location": "Ballroom Grand Hotel",
+      "pic": "Fotografer",
+      "notes": "Pengantin masuk dan duduk di pelaminan"
+    },
+    {
+      "id": 5,
+      "name": "Ijab Qabul",
+      "time": "10:00",
+      "location": "Ballroom Grand Hotel",
+      "pic": "Ustadz",
+      "notes": "Prosesi ijab qabul"
+    },
+    {
+      "id": 6,
+      "name": "Foto Bersama",
+      "time": "10:30",
+      "location": "Ballroom Grand Hotel",
+      "pic": "Fotografer",
+      "notes": "Foto keluarga dan tamu"
+    },
+    {
+      "id": 7,
+      "name": "Makan Bersama",
+      "time": "11:30",
+      "location": "Ballroom Grand Hotel",
+      "pic": "Catering",
+      "notes": "Hidangan makan siang untuk tamu"
+    },
+    {
+      "id": 8,
+      "name": "Hiburan & Dansa",
+      "time": "13:00",
+      "location": "Ballroom Grand Hotel",
+      "pic": "MC & Band",
+      "notes": "Hiburan musik dan dansa pengantin"
+    },
+    {
+      "id": 9,
+      "name": "Penutupan Acara",
+      "time": "15:00",
+      "location": "Ballroom Grand Hotel",
+      "pic": "MC",
+      "notes": "Ucapan terima kasih dan penutupan"
+    }
+  ],
+  "moodboards": [
+    {
+      "id": 1,
+      "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=400"
+    },
+    {
+      "id": 2,
+      "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=400"
+    },
+    {
+      "id": 3,
+      "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=400"
+    }
+  ]
+}

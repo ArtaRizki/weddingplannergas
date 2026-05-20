@@ -15,17 +15,17 @@
     }
 
     :root {
-      --g1: #1a3a2a;
-      --g2: #2d5a3f;
-      --g3: #4a8c6a;
-      --g4: #7bc4a5;
-      --g5: #c8ede0;
-      --g6: #edf8f4;
-      --bg: #f4f9f7;
+      --g1: #3d2b3a;
+      --g2: #6b3a5e;
+      --g3: #c47a9e;
+      --g4: #e8a4c0;
+      --g5: #f5dce8;
+      --g6: #fdf2f7;
+      --bg: #fdf8fa;
       --card: #fff;
-      --text: #1a3a2a;
-      --muted: #6b8f7e;
-      --border: rgba(74, 140, 106, .12);
+      --text: #3d2b3a;
+      --muted: #9e7a8e;
+      --border: rgba(196,122,158,.15);
       --radius: 16px;
       --radius-sm: 10px;
       --shadow: 0 2px 12px rgba(26, 58, 42, .06)
@@ -300,12 +300,12 @@
     }
 
     .btn-d {
-      background: #e0f0e0;
-      color: #2d5a3f
+      background: #fce4ec;
+      color: #6b3a5e
     }
 
     .btn-d:hover {
-      background: #c8e0c8
+      background: #f8d0dc
     }
 
     .btn-sm {
@@ -403,9 +403,7 @@
       font-weight: 700
     }
 
-    .li-badge.hi {
-      background: #e0f0e0;
-      color: #2d5a3f
+    .li-badge.hi { background: #fce4ec; color: #c0392b
     }
 
     .li-badge.md {
@@ -413,10 +411,7 @@
       color: #a67c00
     }
 
-    .li-badge.lo {
-      background: var(--g6);
-      color: var(--g3)
-    }
+    .li-badge.lo { background: #e8f5e9; color: #2e7d32 }
 
     /* GRID CARDS */
     .gcards {
@@ -695,9 +690,9 @@
               </div>
             </div>
             <div class="cpick">
-              <div class="cpick-item"><input type="color" id="pc" value="#5B8C5A"><span id="pcc">#5B8C5A</span></div>
-              <div class="cpick-item"><input type="color" id="sc" value="#88B788"><span id="scc">#88B788</span></div>
-              <div class="cpick-item"><input type="color" id="ac" value="#3D6B3D"><span id="acc">#3D6B3D</span></div>
+              <div class="cpick-item"><input type="color" id="pc" value="#c47a9e"><span id="pcc">#c47a9e</span></div>
+              <div class="cpick-item"><input type="color" id="sc" value="#e8a4c0"><span id="scc">#e8a4c0</span></div>
+              <div class="cpick-item"><input type="color" id="ac" value="#8e4a70"><span id="acc">#8e4a70</span></div>
             </div>
           </div>
           <div class="card bento-wide">
@@ -1179,7 +1174,7 @@
   <div class="toast" id="tst"></div>
 
   <script>
-    var D = { s: { gn: '', bn: '', wd: '', wl: '', tb: 0, pc: '#5B8C5A', sc: '#88B788', ac: '#3D6B3D' }, bg: [], vd: [], td: [], gs: [], rd: [], mb: [], mn: [], ss: [], ad: [], pw: [] };
+    var D = { s: { gn: '', bn: '', wd: '', wl: '', tb: 0, pc: '#c47a9e', sc: '#e8a4c0', ac: '#8e4a70' }, bg: [], vd: [], td: [], gs: [], rd: [], mb: [], mn: [], ss: [], ad: [], pw: [] };
     window.onload = function () { ld(); dash(); };
 
     function go(p) { document.querySelectorAll('.pg').forEach(function (x) { x.className = 'pg' }); document.getElementById(p).className = 'pg on'; document.querySelectorAll('.side a').forEach(function (a) { a.className = '' }); if (event && event.target) { var t = event.target.closest('a'); if (t) t.className = 'on'; } if (p === 'dashboard') dash(); if (p === 'budgeting') sBg(); if (p === 'vendors') sVd(); if (p === 'todo') sTd(); if (p === 'guests') sGs(); if (p === 'rundown') sRd(); if (p === 'moodboard') sMb(); if (p === 'settings') sSt(); if (p === 'menu') sMn(); if (p === 'seserahan') sSs(); if (p === 'admin') sAd(); if (p === 'post') sPw(); }

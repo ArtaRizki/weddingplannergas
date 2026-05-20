@@ -15,24 +15,24 @@
     }
 
     :root {
-      --g1: #3d2b3a;
-      --g2: #6b3a5e;
-      --g3: #c47a9e;
-      --g4: #e8a4c0;
-      --g5: #f5dce8;
-      --g6: #fdf2f7;
-      --bg: #fdf8fa;
+      --g1: #d63384;
+      --g2: #e91e8c;
+      --g3: #ff6bb3;
+      --g4: #ff9ed2;
+      --g5: #ffe0f0;
+      --g6: #fff5fa;
+      --bg: #fff8fc;
       --card: #fff;
-      --text: #3d2b3a;
-      --muted: #9e7a8e;
-      --border: rgba(196,122,158,.15);
+      --text: #4a1942;
+      --muted: #b06090;
+      --border: rgba(255,107,179,.12);
       --radius: 16px;
       --radius-sm: 10px;
       --shadow: 0 2px 12px rgba(26, 58, 42, .06)
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh
@@ -80,12 +80,12 @@
     }
 
     .side a:hover {
-      background: rgba(123, 196, 165, .2)
+      background: rgba(255,107,179,.15)
     }
 
     .side a.on {
       background: var(--g3);
-      box-shadow: 0 4px 12px rgba(74, 140, 106, .3)
+      box-shadow: 0 4px 12px rgba(214,51,132,.3)
     }
 
     .side a .tip {
@@ -575,19 +575,19 @@
 
   <div class="app">
     <nav class="side">
-      <div class="side-logo">💍</div>
-      <a class="on" onclick="go('dashboard')">📊<span class="tip">Dashboard</span></a>
-      <a onclick="go('moodboard')">🎨<span class="tip">Moodboard</span></a>
-      <a onclick="go('menu')">🍽️<span class="tip">Menu</span></a>
-      <a onclick="go('budgeting')">💰<span class="tip">Budget</span></a>
-      <a onclick="go('vendors')">👥<span class="tip">Vendor</span></a>
-      <a onclick="go('todo')">✓<span class="tip">To-Do</span></a>
-      <a onclick="go('guests')">👫<span class="tip">Tamu</span></a>
-      <a onclick="go('rundown')">⏱️<span class="tip">Rundown</span></a>
-      <a onclick="go('seserahan')">🎁<span class="tip">Seserahan</span></a>
-      <a onclick="go('admin')">📋<span class="tip">Administrasi</span></a>
-      <a onclick="go('post')">🎉<span class="tip">Post Wedding</span></a>
-      <a onclick="go('settings')">⚙️<span class="tip">Pengaturan</span></a>
+      <div class="side-logo">💍 Wedding Planner</div>
+      <a class="on" onclick="go('dashboard')">📊 <span class="nm">Dashboard</span></a>
+      <a onclick="go('moodboard')">🎨 <span class="nm">Moodboard</span></a>
+      <a onclick="go('menu')">🍽️ <span class="nm">Menu</span></a>
+      <a onclick="go('budgeting')">💰 <span class="nm">Budget</span></a>
+      <a onclick="go('vendors')">👥 <span class="nm">Vendor</span></a>
+      <a onclick="go('todo')">✓ <span class="nm">To-Do</span></a>
+      <a onclick="go('guests')">👫 <span class="nm">Tamu</span></a>
+      <a onclick="go('rundown')">⏱️ <span class="nm">Rundown</span></a>
+      <a onclick="go('seserahan')">🎁 <span class="nm">Seserahan</span></a>
+      <a onclick="go('admin')">📋 <span class="nm">Administrasi</span></a>
+      <a onclick="go('post')">🎉 <span class="nm">Post Wedding</span></a>
+      <a onclick="go('settings')">⚙️ <span class="nm">Pengaturan</span></a>
     </nav>
     <div class="main">
 

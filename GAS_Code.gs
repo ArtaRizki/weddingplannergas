@@ -1,6 +1,13 @@
 // Wedding Planner - Google Apps Script
 // Copy isi file ini ke Code.gs di Google Apps Script
 
+// GANTI ID INI dengan ID spreadsheet kamu
+var SPREADSHEET_ID = '1OSw_Uob90L2dZVAJorykqFn0dLjxM1HSgakzsZt9eaU';
+
+function getSpreadsheet() {
+  return SpreadsheetApp.openById(SPREADSHEET_ID);
+}
+
 function doGet() {
   return HtmlService.createHtmlOutputFromFile('Index')
     .setTitle('Wedding Planner')
@@ -9,7 +16,7 @@ function doGet() {
 
 function saveData(jsonString) {
   try {
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = getSpreadsheet();
     var sheet = ss.getSheetByName('_AppData');
     if (!sheet) sheet = ss.insertSheet('_AppData');
     sheet.clearContents();
@@ -22,7 +29,7 @@ function saveData(jsonString) {
 
 function loadData() {
   try {
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = getSpreadsheet();
     var sheet = ss.getSheetByName('_AppData');
     if (!sheet) return '';
     return sheet.getRange('A1').getValue() || '';
@@ -37,7 +44,7 @@ function loadData() {
 // ============================================================
 
 function syncFromSpreadsheet() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = getSpreadsheet();
   var result = {
     settings: getSettingsData(ss),
     seserahan: getSeserahanData(ss),

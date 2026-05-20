@@ -1,343 +1,1257 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<base target="_top">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <base target="_top">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
+
 <body>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--g1:#1a3a2a;--g2:#2d5a3f;--g3:#4a8c6a;--g4:#7bc4a5;--g5:#c8ede0;--g6:#edf8f4;--bg:#f4f9f7;--card:#fff;--text:#1a3a2a;--muted:#6b8f7e;--border:rgba(74,140,106,.12);--radius:16px;--radius-sm:10px;--shadow:0 2px 12px rgba(26,58,42,.06)}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.app{display:flex;min-height:100vh}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-/* SIDEBAR */
-.side{background:var(--g1);display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:4px;position:fixed;width:56px;height:100vh;overflow-y:auto;z-index:100}
-.side-logo{font-size:20px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.1)}
-.side a{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:16px;text-decoration:none;transition:all .2s;cursor:pointer;position:relative}
-.side a:hover{background:rgba(123,196,165,.2)}
-.side a.on{background:var(--g3);box-shadow:0 4px 12px rgba(74,140,106,.3)}
-.side a .tip{position:absolute;left:46px;background:var(--g1);color:#fff;padding:3px 8px;border-radius:5px;font-size:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
-.side a:hover .tip{opacity:1}
+    :root {
+      --g1: #1a3a2a;
+      --g2: #2d5a3f;
+      --g3: #4a8c6a;
+      --g4: #7bc4a5;
+      --g5: #c8ede0;
+      --g6: #edf8f4;
+      --bg: #f4f9f7;
+      --card: #fff;
+      --text: #1a3a2a;
+      --muted: #6b8f7e;
+      --border: rgba(74, 140, 106, .12);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 2px 12px rgba(26, 58, 42, .06)
+    }
 
-/* MAIN */
-.main{margin-left:56px;padding:20px;overflow-y:auto;flex:1}
-.main h1{font-size:20px;font-weight:700;margin-bottom:16px;color:var(--g1)}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh
+    }
 
-/* BENTO GRID */
-.bento{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.bento-wide{grid-column:1/-1}
+    .app {
+      display: flex;
+      min-height: 100vh
+    }
 
-/* CARDS */
-.card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,58,42,.08)}
-.card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.card-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--g6)}
-.card-title{font-size:14px;font-weight:700;color:var(--g1)}
-.card-subtitle{font-size:11px;color:var(--muted)}
+    /* SIDEBAR */
+    .side {
+      background: var(--g1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 4px;
+      position: fixed;
+      width: 56px;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100
+    }
 
-/* STAT PILL */
-.stat{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(135deg,var(--g5),var(--g6));border-radius:var(--radius-sm)}
-.stat-num{font-size:22px;font-weight:800;color:var(--g2)}
-.stat-lbl{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+    .side-logo {
+      font-size: 20px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, .1)
+    }
 
-/* PROGRESS */
-.prog{height:8px;background:var(--g5);border-radius:4px;overflow:hidden;margin:8px 0}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--g3),var(--g4));border-radius:4px;transition:width .4s}
+    .side a {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all .2s;
+      cursor: pointer;
+      position: relative
+    }
 
-/* FORMS */
-.field{margin-bottom:10px}
-.field label{display:block;font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px}
-input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;background:var(--bg);transition:border-color .2s}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--g3);background:#fff}
-textarea{min-height:60px;resize:vertical}
-.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+    .side a:hover {
+      background: rgba(123, 196, 165, .2)
+    }
 
-/* BUTTONS */
-.btn{padding:10px 18px;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
-.btn-p{background:var(--g3);color:#fff}.btn-p:hover{background:var(--g2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(74,140,106,.25)}
-.btn-s{background:var(--g6);color:var(--g2);border:1.5px solid var(--border)}.btn-s:hover{background:var(--g5)}
-.btn-d{background:#fee;color:#c44}.btn-d:hover{background:#fdd}
-.btn-sm{padding:6px 10px;font-size:10px;border-radius:6px}
+    .side a.on {
+      background: var(--g3);
+      box-shadow: 0 4px 12px rgba(74, 140, 106, .3)
+    }
 
-/* TABLE */
-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px}
-th{background:var(--g6);padding:10px 12px;text-align:left;font-weight:600;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
-th:first-child{border-radius:8px 0 0 8px}
-th:last-child{border-radius:0 8px 8px 0}
-td{padding:10px 12px;border-bottom:1px solid var(--border)}
+    .side a .tip {
+      position: absolute;
+      left: 46px;
+      background: var(--g1);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s
+    }
 
-/* LIST ITEMS */
-.li{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:6px;border:1px solid var(--border);transition:all .2s}
-.li:hover{border-color:var(--g4);background:var(--g6)}
-.li.done{opacity:.5}.li.done .li-text{text-decoration:line-through}
-.li input[type=checkbox]{width:16px;height:16px;accent-color:var(--g3);cursor:pointer}
-.li-content{flex:1;min-width:0}
-.li-text{font-size:13px;font-weight:600;margin-bottom:2px}
-.li-meta{font-size:10px;color:var(--muted)}
-.li-badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700}
-.li-badge.hi{background:#fee;color:#c44}.li-badge.md{background:#fef3e0;color:#a67c00}.li-badge.lo{background:var(--g6);color:var(--g3)}
+    .side a:hover .tip {
+      opacity: 1
+    }
 
-/* GRID CARDS */
-.gcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.gc{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;transition:all .2s}
-.gc:hover{border-color:var(--g4);background:var(--g6)}
-.gc h4{font-size:12px;font-weight:700;margin-bottom:4px}
-.gc p{font-size:10px;color:var(--muted)}
-.gc .xb{margin-top:6px}
+    /* MAIN */
+    .main {
+      margin-left: 56px;
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1
+    }
 
-/* MOODBOARD */
-.mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
-.mood-item{border-radius:var(--radius-sm);overflow:hidden;position:relative;aspect-ratio:1;cursor:pointer;transition:transform .2s}
-.mood-item:hover{transform:scale(1.03)}
-.mood-item img{width:100%;height:100%;object-fit:cover}
-.mood-item .xb{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .main h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--g1)
+    }
 
-/* COLOR PICKER */
-.cpick{display:flex;gap:14px;flex-wrap:wrap}
-.cpick-item{text-align:center}
-.cpick-item input[type=color]{width:48px;height:48px;border:2px solid var(--border);border-radius:12px;cursor:pointer;padding:2px}
-.cpick-item span{display:block;font-size:9px;font-family:monospace;color:var(--muted);margin-top:4px}
+    /* BENTO GRID */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px
+    }
 
-/* TOAST */
-.toast{position:fixed;bottom:20px;right:20px;background:var(--g1);color:#fff;padding:10px 18px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;opacity:0;transition:all .3s;transform:translateY(10px);z-index:9999}
-.toast.show{opacity:1;transform:translateY(0)}
+    .bento-wide {
+      grid-column: 1/-1
+    }
 
-/* PAGES */
-.pg{display:none}.pg.on{display:block}
+    /* CARDS */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s
+    }
 
-/* RESPONSIVE */
-@media(max-width:600px){
-  .side{position:fixed;bottom:0;top:auto;left:0;right:0;width:100%;height:54px;flex-direction:row;justify-content:center;padding:0 4px;gap:1px;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.1)}
-  .side-logo{display:none}
-  .side a{width:34px;height:34px;font-size:14px;border-radius:8px}
-  .side a .tip{display:none}
-  .main{margin-left:0;padding:14px 12px 70px 12px}
-  .bento{grid-template-columns:1fr}
-  .bento-wide{grid-column:1}
-  .form-row{grid-template-columns:1fr}
-  .gcards{grid-template-columns:1fr}
-  .mood-grid{grid-template-columns:repeat(2,1fr)}
-}
-</style>
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 58, 42, .08)
+    }
 
-<div class="app">
-<nav class="side">
-<div class="side-logo">💍</div>
-<a class="on" onclick="go('dashboard')">📊<span class="tip">Dashboard</span></a>
-<a onclick="go('moodboard')">🎨<span class="tip">Moodboard</span></a>
-<a onclick="go('menu')">🍽️<span class="tip">Menu</span></a>
-<a onclick="go('budgeting')">💰<span class="tip">Budget</span></a>
-<a onclick="go('vendors')">👥<span class="tip">Vendor</span></a>
-<a onclick="go('todo')">✓<span class="tip">To-Do</span></a>
-<a onclick="go('guests')">👫<span class="tip">Tamu</span></a>
-<a onclick="go('rundown')">⏱️<span class="tip">Rundown</span></a>
-<a onclick="go('seserahan')">🎁<span class="tip">Seserahan</span></a>
-<a onclick="go('admin')">📋<span class="tip">Administrasi</span></a>
-<a onclick="go('post')">🎉<span class="tip">Post Wedding</span></a>
-<a onclick="go('settings')">⚙️<span class="tip">Pengaturan</span></a>
-</nav>
-<div class="main">
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px
+    }
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="pg on">
-<h1>Dashboard ✨</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">👰</div><div><div class="card-title" id="bN">-</div><div class="card-subtitle">Pengantin Wanita</div></div></div></div>
-  <div class="card"><div class="card-header"><div class="card-icon">🤵</div><div><div class="card-title" id="gN">-</div><div class="card-subtitle">Pengantin Pria</div></div></div></div>
-  <div class="card"><div class="card-header"><div class="card-icon">📅</div><div><div class="card-title" id="wD">-</div><div class="card-subtitle">Tanggal</div></div></div></div>
-  <div class="card"><div class="card-header"><div class="card-icon">📍</div><div><div class="card-title" id="wL">-</div><div class="card-subtitle">Lokasi</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="tB">Rp 0</div><div class="stat-lbl">Total Budget</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="tS">Rp 0</div><div class="stat-lbl">Pengeluaran</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="tG">0</div><div class="stat-lbl">Total Tamu</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="tC">0/0</div><div class="stat-lbl">Task Selesai</div></div></div></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📈</div><div><div class="card-title">Progress Persiapan</div><div class="card-subtitle" id="pP">0%</div></div></div><div class="prog"><div class="prog-fill" id="oP" style="width:0%"></div></div></div>
-</div>
-</div>
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: var(--g6)
+    }
 
-<!-- MOODBOARD -->
-<div id="moodboard" class="pg">
-<h1>Moodboard & Warna 🎨</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">🎨</div><div><div class="card-title">Warna Tema</div></div></div><div class="cpick"><div class="cpick-item"><input type="color" id="pc" value="#5B8C5A"><span id="pcc">#5B8C5A</span></div><div class="cpick-item"><input type="color" id="sc" value="#88B788"><span id="scc">#88B788</span></div><div class="cpick-item"><input type="color" id="ac" value="#3D6B3D"><span id="acc">#3D6B3D</span></div></div></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">🖼️</div><div><div class="card-title">Moodboard</div></div></div><div id="mbG" class="mood-grid"></div><button class="btn btn-p" onclick="addMB()" style="margin-top:10px">+ Tambah Gambar</button></div>
-</div>
-</div>
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--g1)
+    }
 
-<!-- MENU -->
-<div id="menu" class="pg">
-<h1>Menu Catering 🍽️</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Menu</div></div></div><div class="form-row"><div class="field"><input type="text" id="mnN" placeholder="Nama Menu"></div><div class="field"><select id="mnC"><option value="">Kategori</option><option>Appetizer</option><option>Main Course</option><option>Dessert</option><option>Minuman</option><option>Snack</option></select></div></div><div class="form-row"><div class="field"><input type="number" id="mnQ" placeholder="Jumlah Porsi"></div></div><div class="field"><textarea id="mnNo" placeholder="Catatan"></textarea></div><button class="btn btn-p" onclick="aMn()">Tambah</button></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📋</div><div><div class="card-title">Daftar Menu</div></div></div><div id="mnL" class="gcards"></div></div>
-</div>
-</div>
+    .card-subtitle {
+      font-size: 11px;
+      color: var(--muted)
+    }
 
-<!-- BUDGETING -->
-<div id="budgeting" class="pg">
-<h1>Budgeting 💰</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Biaya</div></div></div><div class="form-row"><div class="field"><input type="text" id="bgN" placeholder="Kategori"></div><div class="field"><input type="number" id="bgB" placeholder="Budget"></div><div class="field"><input type="number" id="bgA" placeholder="Aktual"></div></div><button class="btn btn-p" onclick="aBg()">Tambah</button></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="sB">Rp 0</div><div class="stat-lbl">Budget</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="sS">Rp 0</div><div class="stat-lbl">Pengeluaran</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="sR">Rp 0</div><div class="stat-lbl">Sisa</div></div></div></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📊</div><div><div class="card-title">Detail Budget</div></div></div><table><thead><tr><th>Kategori</th><th>Budget</th><th>Aktual</th><th>Sisa</th><th>%</th><th></th></tr></thead><tbody id="bgT"></tbody></table></div>
-</div>
-</div>
+    /* STAT PILL */
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, var(--g5), var(--g6));
+      border-radius: var(--radius-sm)
+    }
 
-<!-- VENDORS -->
-<div id="vendors" class="pg">
-<h1>Vendor List 👥</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Vendor</div></div></div><div class="form-row"><div class="field"><input type="text" id="vdN" placeholder="Nama Vendor"></div><div class="field"><select id="vdC"><option value="">Kategori</option><option>Fotografi</option><option>Videografi</option><option>Catering</option><option>Dekorasi</option><option>Makeup</option><option>Venue</option><option>Undangan</option><option>Entertainment</option><option>Lainnya</option></select></div></div><div class="form-row"><div class="field"><input type="tel" id="vdP" placeholder="Telepon"></div><div class="field"><input type="number" id="vdCo" placeholder="Biaya"></div></div><button class="btn btn-p" onclick="aVd()">Tambah</button></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📋</div><div><div class="card-title">Daftar Vendor</div></div></div><div id="vdL" class="gcards"></div></div>
-</div>
-</div>
+    .stat-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--g2)
+    }
 
-<!-- TODO -->
-<div id="todo" class="pg">
-<h1>To-Do List ✓</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Task</div></div></div><div class="form-row"><div class="field"><input type="text" id="tdD" placeholder="Deskripsi"></div><div class="field"><select id="tdC"><option value="">Kategori</option><option>Persiapan</option><option>Vendor</option><option>Tamu</option><option>Dekorasi</option><option>Dokumen</option><option>Lainnya</option></select></div></div><div class="form-row"><div class="field"><input type="date" id="tdDt"></div><div class="field"><select id="tdP"><option value="Rendah">Rendah</option><option value="Sedang">Sedang</option><option value="Tinggi">Tinggi</option></select></div></div><button class="btn btn-p" onclick="aTd()">Tambah</button></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📋</div><div><div class="card-title">Daftar Task</div></div></div><div id="tdL"></div></div>
-</div>
-</div>
+    .stat-lbl {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
 
-<!-- GUESTS -->
-<div id="guests" class="pg">
-<h1>Tamu & Undangan 👫</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Tamu</div></div></div><div class="form-row"><div class="field"><input type="text" id="gsN" placeholder="Nama"></div><div class="field"><select id="gsS"><option value="">Pihak</option><option value="Pria">Pria</option><option value="Wanita">Wanita</option><option value="Keluarga">Keluarga</option></select></div></div><div class="form-row"><div class="field"><input type="tel" id="gsP" placeholder="Telepon"></div><div class="field"><select id="gsSt"><option>Belum Diundang</option><option>Diundang</option><option>Konfirmasi</option><option>Hadir</option><option>Tidak Hadir</option></select></div></div><button class="btn btn-p" onclick="aGs()">Tambah</button></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="gT">0</div><div class="stat-lbl">Total</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="gC">0</div><div class="stat-lbl">Konfirmasi</div></div></div></div>
-  <div class="card"><div class="stat"><div><div class="stat-num" id="gP">0</div><div class="stat-lbl">Pending</div></div></div></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📋</div><div><div class="card-title">Daftar Tamu</div></div></div><table><thead><tr><th>Nama</th><th>Pihak</th><th>Telepon</th><th>Status</th><th></th></tr></thead><tbody id="gsT"></tbody></table></div>
-</div>
-</div>
+    /* PROGRESS */
+    .prog {
+      height: 8px;
+      background: var(--g5);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 8px 0
+    }
 
-<!-- RUNDOWN -->
-<div id="rundown" class="pg">
-<h1>Rundown Acara ⏱️</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Acara</div></div></div><div class="form-row"><div class="field"><input type="text" id="rdN" placeholder="Nama Acara"></div><div class="field"><input type="time" id="rdT"></div></div><div class="form-row"><div class="field"><input type="text" id="rdL" placeholder="Lokasi"></div><div class="field"><input type="text" id="rdP" placeholder="PIC"></div></div><div class="field"><textarea id="rdNo" placeholder="Catatan"></textarea></div><button class="btn btn-p" onclick="aRd()">Tambah</button></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📋</div><div><div class="card-title">Timeline</div></div></div><div id="rdLi"></div></div>
-</div>
-</div>
+    .prog-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--g3), var(--g4));
+      border-radius: 4px;
+      transition: width .4s
+    }
 
-<!-- SESERAHAN -->
-<div id="seserahan" class="pg">
-<h1>List Seserahan 🎁</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Seserahan</div></div></div><div class="form-row"><div class="field"><input type="text" id="ssN" placeholder="Nama Item"></div><div class="field"><select id="ssS"><option value="">Dari Pihak</option><option value="Pria ke Wanita">Pria ke Wanita</option><option value="Wanita ke Pria">Wanita ke Pria</option></select></div></div><div class="form-row"><div class="field"><input type="number" id="ssCo" placeholder="Estimasi Biaya"></div></div><div class="field"><textarea id="ssNo" placeholder="Catatan"></textarea></div><button class="btn btn-p" onclick="aSs()">Tambah</button></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">📋</div><div><div class="card-title">Daftar Seserahan</div></div></div><div id="ssL" class="gcards"></div></div>
-</div>
-</div>
+    /* FORMS */
+    .field {
+      margin-bottom: 10px
+    }
 
-<!-- ADMIN -->
-<div id="admin" class="pg">
-<h1>Check Administrasi 📋</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Dokumen</div></div></div><div class="form-row"><div class="field"><input type="text" id="adN" placeholder="Nama Dokumen"></div><div class="field"><select id="adC"><option value="">Kategori</option><option>KUA/Gereja</option><option>Catatan Sipil</option><option>Kesehatan</option><option>Kependudukan</option><option>Lainnya</option></select></div></div><div class="field"><input type="date" id="adD"></div><div class="field"><textarea id="adNo" placeholder="Catatan"></textarea></div><button class="btn btn-p" onclick="aAd()">Tambah</button></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">✅</div><div><div class="card-title">Checklist Dokumen</div></div></div><div id="adL"></div></div>
-</div>
-</div>
+    .field label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      margin-bottom: 4px
+    }
 
-<!-- POST WEDDING -->
-<div id="post" class="pg">
-<h1>Post Wedding 🎉</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">➕</div><div><div class="card-title">Tambah Item</div></div></div><div class="form-row"><div class="field"><input type="text" id="pwN" placeholder="Deskripsi"></div><div class="field"><select id="pwC"><option value="">Kategori</option><option>Ucapan Terima Kasih</option><option>Ambil Foto/Video</option><option>Honeymoon</option><option>Kado/Amplop</option><option>Lainnya</option></select></div></div><div class="field"><input type="date" id="pwD"></div><div class="field"><textarea id="pwNo" placeholder="Catatan"></textarea></div><button class="btn btn-p" onclick="aPw()">Tambah</button></div>
-  <div class="card bento-wide"><div class="card-header"><div class="card-icon">✅</div><div><div class="card-title">Checklist Post Wedding</div></div></div><div id="pwL"></div></div>
-</div>
-</div>
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: inherit;
+      background: var(--bg);
+      transition: border-color .2s
+    }
 
-<!-- SETTINGS -->
-<div id="settings" class="pg">
-<h1>Pengaturan ⚙️</h1>
-<div class="bento">
-  <div class="card"><div class="card-header"><div class="card-icon">💒</div><div><div class="card-title">Informasi Pernikahan</div></div></div><div class="form-row"><div class="field"><label>Pengantin Pria</label><input type="text" id="stG"></div><div class="field"><label>Pengantin Wanita</label><input type="text" id="stB"></div></div><div class="form-row"><div class="field"><label>Tanggal</label><input type="date" id="stD"></div><div class="field"><label>Lokasi</label><input type="text" id="stL"></div></div><div class="field"><label>Total Budget</label><input type="number" id="stBg"></div><button class="btn btn-p" onclick="aSt()">💾 Simpan</button></div>
-  <div class="card"><div class="card-header"><div class="card-icon">🔄</div><div><div class="card-title">Sync dari Spreadsheet</div><div class="card-subtitle">Import data dari Google Sheets</div></div></div><button class="btn btn-p" onclick="syncSheet()">🔄 Sync Sekarang</button></div>
-  <div class="card"><div class="card-header"><div class="card-icon">💾</div><div><div class="card-title">Data Management</div></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-s" onclick="expD()">📥 Export JSON</button><button class="btn btn-d" onclick="clrD()">🗑️ Hapus Semua</button></div></div>
-</div>
-</div>
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--g3);
+      background: #fff
+    }
 
-</div>
-</div>
-<div class="toast" id="tst"></div>
+    textarea {
+      min-height: 60px;
+      resize: vertical
+    }
 
-<script>
-var D={s:{gn:'',bn:'',wd:'',wl:'',tb:0,pc:'#5B8C5A',sc:'#88B788',ac:'#3D6B3D'},bg:[],vd:[],td:[],gs:[],rd:[],mb:[],mn:[],ss:[],ad:[],pw:[]};
-window.onload=function(){ld();dash();};
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px
+    }
 
-function go(p){document.querySelectorAll('.pg').forEach(function(x){x.className='pg'});document.getElementById(p).className='pg on';document.querySelectorAll('.side a').forEach(function(a){a.className=''});if(event&&event.target){var t=event.target.closest('a');if(t)t.className='on';}if(p==='dashboard')dash();if(p==='budgeting')sBg();if(p==='vendors')sVd();if(p==='todo')sTd();if(p==='guests')sGs();if(p==='rundown')sRd();if(p==='moodboard')sMb();if(p==='settings')sSt();if(p==='menu')sMn();if(p==='seserahan')sSs();if(p==='admin')sAd();if(p==='post')sPw();}
+    /* BUTTONS */
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: inherit;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px
+    }
 
-function dash(){document.getElementById('gN').textContent=D.s.gn||'-';document.getElementById('bN').textContent=D.s.bn||'-';document.getElementById('wD').textContent=fd(D.s.wd)||'-';document.getElementById('wL').textContent=D.s.wl||'-';var tb=D.bg.reduce(function(a,b){return a+(b.b||0)},0);var ts=D.bg.reduce(function(a,b){return a+(b.a||0)},0);var dn=D.td.filter(function(t){return t.d}).length;document.getElementById('tB').textContent=fc(tb);document.getElementById('tS').textContent=fc(ts);document.getElementById('tG').textContent=D.gs.length;document.getElementById('tC').textContent=dn+'/'+D.td.length;var pct=D.td.length>0?(dn/D.td.length)*100:0;document.getElementById('oP').style.width=pct+'%';document.getElementById('pP').textContent=Math.round(pct)+'%';}
+    .btn-p {
+      background: var(--g3);
+      color: #fff
+    }
 
-function aBg(){var n=gv('bgN');if(!n)return;D.bg.push({id:Date.now(),n:n,b:gn('bgB'),a:gn('bgA')});sv();sBg();cl('bgN');cl('bgB');cl('bgA');}
-function sBg(){var t=document.getElementById('bgT');t.innerHTML='';var tb=0,ts=0;D.bg.forEach(function(b){tb+=b.b;ts+=b.a;var p=b.b>0?Math.round(b.a/b.b*100):0;t.innerHTML+='<tr><td>'+b.n+'</td><td>'+fc(b.b)+'</td><td>'+fc(b.a)+'</td><td>'+fc(b.b-b.a)+'</td><td>'+p+'%</td><td><button class="btn btn-d btn-sm" onclick="dBg('+b.id+')">×</button></td></tr>'});document.getElementById('sB').textContent=fc(tb);document.getElementById('sS').textContent=fc(ts);document.getElementById('sR').textContent=fc(tb-ts);}
-function dBg(id){if(!confirm('Hapus?'))return;D.bg=D.bg.filter(function(b){return b.id!==id});sv();sBg();}
+    .btn-p:hover {
+      background: var(--g2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(74, 140, 106, .25)
+    }
 
-function aVd(){var n=gv('vdN');if(!n)return;D.vd.push({id:Date.now(),n:n,c:gv('vdC'),p:gv('vdP'),co:gn('vdCo')});sv();sVd();cl('vdN');cl('vdP');cl('vdCo');}
-function sVd(){var l=document.getElementById('vdL');l.innerHTML='';D.vd.forEach(function(v){l.innerHTML+='<div class="gc"><h4>'+v.n+'</h4><p>'+v.c+(v.p?' · 📞'+v.p:'')+(v.co>0?' · '+fc(v.co):'')+'</p><button class="btn btn-d btn-sm xb" onclick="dVd('+v.id+')">Hapus</button></div>'});}
-function dVd(id){if(!confirm('Hapus?'))return;D.vd=D.vd.filter(function(v){return v.id!==id});sv();sVd();}
+    .btn-s {
+      background: var(--g6);
+      color: var(--g2);
+      border: 1.5px solid var(--border)
+    }
 
-function aTd(){var d=gv('tdD');if(!d)return;D.td.push({id:Date.now(),ds:d,c:gv('tdC'),dt:gv('tdDt'),p:gv('tdP'),d:false});sv();sTd();dash();cl('tdD');cl('tdDt');}
-function sTd(){var l=document.getElementById('tdL');l.innerHTML='';D.td.slice().sort(function(a,b){return(a.dt||'').localeCompare(b.dt||'')}).forEach(function(t){var bc=t.p==='Tinggi'?'hi':t.p==='Sedang'?'md':'lo';l.innerHTML+='<div class="li'+(t.d?' done':'')+'"><input type="checkbox"'+(t.d?' checked':'')+' onchange="tTd('+t.id+')"><div class="li-content"><div class="li-text">'+t.ds+'</div><div class="li-meta">'+t.c+' · '+fd(t.dt)+' <span class="li-badge '+bc+'">'+t.p+'</span></div></div><button class="btn btn-d btn-sm" onclick="dTd('+t.id+')">×</button></div>'});}
-function tTd(id){var t=D.td.find(function(x){return x.id===id});if(t){t.d=!t.d;sv();sTd();dash();}}
-function dTd(id){if(!confirm('Hapus?'))return;D.td=D.td.filter(function(t){return t.id!==id});sv();sTd();dash();}
+    .btn-s:hover {
+      background: var(--g5)
+    }
 
-function aGs(){var n=gv('gsN');if(!n)return;D.gs.push({id:Date.now(),n:n,s:gv('gsS'),p:gv('gsP'),st:gv('gsSt')});sv();sGs();dash();cl('gsN');cl('gsP');}
-function sGs(){var t=document.getElementById('gsT');t.innerHTML='';D.gs.forEach(function(g){t.innerHTML+='<tr><td>'+g.n+'</td><td>'+g.s+'</td><td>'+g.p+'</td><td>'+g.st+'</td><td><button class="btn btn-d btn-sm" onclick="dGs('+g.id+')">×</button></td></tr>'});var cf=D.gs.filter(function(g){return g.st==='Konfirmasi'||g.st==='Hadir'}).length;document.getElementById('gT').textContent=D.gs.length;document.getElementById('gC').textContent=cf;document.getElementById('gP').textContent=D.gs.length-cf;}
-function dGs(id){if(!confirm('Hapus?'))return;D.gs=D.gs.filter(function(g){return g.id!==id});sv();sGs();dash();}
+    .btn-d {
+      background: #fee;
+      color: #c44
+    }
 
-function aRd(){var n=gv('rdN');if(!n)return;D.rd.push({id:Date.now(),n:n,t:gv('rdT'),l:gv('rdL'),p:gv('rdP'),no:gv('rdNo')});sv();sRd();cl('rdN');cl('rdT');cl('rdL');cl('rdP');cl('rdNo');}
-function sRd(){var l=document.getElementById('rdLi');l.innerHTML='';D.rd.slice().sort(function(a,b){return(a.t||'').localeCompare(b.t||'')}).forEach(function(r){l.innerHTML+='<div class="li"><div class="li-content"><div class="li-text"><span style="background:var(--g3);color:#fff;padding:2px 8px;border-radius:4px;font-size:10px;margin-right:8px">'+r.t+'</span>'+r.n+'</div><div class="li-meta">📍 '+r.l+' · 👤 '+r.p+(r.no?' · '+r.no:'')+'</div></div><button class="btn btn-d btn-sm" onclick="dRd('+r.id+')">×</button></div>'});}
-function dRd(id){if(!confirm('Hapus?'))return;D.rd=D.rd.filter(function(r){return r.id!==id});sv();sRd();}
+    .btn-d:hover {
+      background: #fdd
+    }
 
-function sMb(){var g=document.getElementById('mbG');g.innerHTML='';D.mb.forEach(function(m){g.innerHTML+='<div class="mood-item"><img src="'+m.u+'" onerror="this.src=\'https://via.placeholder.com/150/c8ede0/2d5a3f?text=🌿\'"><button class="xb" onclick="dMb('+m.id+')">×</button></div>'});}
-function addMB(){var u=prompt('URL gambar:');if(u){D.mb.push({id:Date.now(),u:u});sv();sMb();}}
-function dMb(id){D.mb=D.mb.filter(function(m){return m.id!==id});sv();sMb();}
+    .btn-sm {
+      padding: 6px 10px;
+      font-size: 10px;
+      border-radius: 6px
+    }
 
-function aMn(){var n=gv('mnN');if(!n)return;D.mn.push({id:Date.now(),n:n,c:gv('mnC'),q:gn('mnQ'),no:gv('mnNo')});sv();sMn();cl('mnN');cl('mnQ');cl('mnNo');}
-function sMn(){var l=document.getElementById('mnL');l.innerHTML='';D.mn.forEach(function(m){l.innerHTML+='<div class="gc"><h4>'+m.n+'</h4><p>'+m.c+(m.q?' · '+m.q+' porsi':'')+(m.no?' · '+m.no:'')+'</p><button class="btn btn-d btn-sm xb" onclick="dMn('+m.id+')">Hapus</button></div>'});}
-function dMn(id){if(!confirm('Hapus?'))return;D.mn=D.mn.filter(function(m){return m.id!==id});sv();sMn();}
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 12px
+    }
 
-function aSs(){var n=gv('ssN');if(!n)return;D.ss.push({id:Date.now(),n:n,s:gv('ssS'),co:gn('ssCo'),no:gv('ssNo')});sv();sSs();cl('ssN');cl('ssCo');cl('ssNo');}
-function sSs(){var l=document.getElementById('ssL');l.innerHTML='';D.ss.forEach(function(s){l.innerHTML+='<div class="gc"><h4>'+s.n+'</h4><p>'+s.s+(s.co>0?' · '+fc(s.co):'')+(s.no?' · '+s.no:'')+'</p><button class="btn btn-d btn-sm xb" onclick="dSs('+s.id+')">Hapus</button></div>'});}
-function dSs(id){if(!confirm('Hapus?'))return;D.ss=D.ss.filter(function(s){return s.id!==id});sv();sSs();}
+    th {
+      background: var(--g6);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .3px
+    }
 
-function aAd(){var n=gv('adN');if(!n)return;D.ad.push({id:Date.now(),n:n,c:gv('adC'),dl:gv('adD'),no:gv('adNo'),d:false});sv();sAd();cl('adN');cl('adD');cl('adNo');}
-function sAd(){var l=document.getElementById('adL');l.innerHTML='';D.ad.forEach(function(a){l.innerHTML+='<div class="li'+(a.d?' done':'')+'"><input type="checkbox"'+(a.d?' checked':'')+' onchange="tAd('+a.id+')"><div class="li-content"><div class="li-text">'+a.n+'</div><div class="li-meta">'+a.c+(a.dl?' · 📅'+fd(a.dl):'')+(a.no?' · '+a.no:'')+'</div></div><button class="btn btn-d btn-sm" onclick="dAd('+a.id+')">×</button></div>'});}
-function tAd(id){var a=D.ad.find(function(x){return x.id===id});if(a){a.d=!a.d;sv();sAd();}}
-function dAd(id){if(!confirm('Hapus?'))return;D.ad=D.ad.filter(function(a){return a.id!==id});sv();sAd();}
+    th:first-child {
+      border-radius: 8px 0 0 8px
+    }
 
-function aPw(){var n=gv('pwN');if(!n)return;D.pw.push({id:Date.now(),n:n,c:gv('pwC'),dl:gv('pwD'),no:gv('pwNo'),d:false});sv();sPw();cl('pwN');cl('pwD');cl('pwNo');}
-function sPw(){var l=document.getElementById('pwL');l.innerHTML='';D.pw.forEach(function(p){l.innerHTML+='<div class="li'+(p.d?' done':'')+'"><input type="checkbox"'+(p.d?' checked':'')+' onchange="tPw('+p.id+')"><div class="li-content"><div class="li-text">'+p.n+'</div><div class="li-meta">'+p.c+(p.dl?' · 📅'+fd(p.dl):'')+(p.no?' · '+p.no:'')+'</div></div><button class="btn btn-d btn-sm" onclick="dPw('+p.id+')">×</button></div>'});}
-function tPw(id){var p=D.pw.find(function(x){return x.id===id});if(p){p.d=!p.d;sv();sPw();}}
-function dPw(id){if(!confirm('Hapus?'))return;D.pw=D.pw.filter(function(p){return p.id!==id});sv();sPw();}
+    th:last-child {
+      border-radius: 0 8px 8px 0
+    }
 
-function sSt(){document.getElementById('stG').value=D.s.gn;document.getElementById('stB').value=D.s.bn;document.getElementById('stD').value=D.s.wd;document.getElementById('stL').value=D.s.wl;document.getElementById('stBg').value=D.s.tb;document.getElementById('pc').value=D.s.pc;document.getElementById('sc').value=D.s.sc;document.getElementById('ac').value=D.s.ac;document.getElementById('pcc').textContent=D.s.pc;document.getElementById('scc').textContent=D.s.sc;document.getElementById('acc').textContent=D.s.ac;}
-function aSt(){D.s.gn=gv('stG');D.s.bn=gv('stB');D.s.wd=gv('stD');D.s.wl=gv('stL');D.s.tb=gn('stBg');sv();dash();toast('Tersimpan! ✨');}
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border)
+    }
 
-function sv(){var j=JSON.stringify(D);if(typeof google!=='undefined'&&google.script){google.script.run.saveData(j);}else{localStorage.setItem('wp4',j);}}
-function ld(){if(typeof google!=='undefined'&&google.script){google.script.run.withSuccessHandler(function(j){if(j){try{Object.assign(D,JSON.parse(j));dash();}catch(e){}}}).loadData();}else{var s=localStorage.getItem('wp4');if(s){try{Object.assign(D,JSON.parse(s));}catch(e){}}}}
+    /* LIST ITEMS */
+    .li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      border: 1px solid var(--border);
+      transition: all .2s
+    }
 
-function syncSheet(){if(typeof google==='undefined'||!google.script){toast('Hanya di Google Apps Script');return;}toast('Syncing...');google.script.run.withSuccessHandler(function(json){try{var r=JSON.parse(json);if(r.settings){if(r.settings.groomName)D.s.gn=r.settings.groomName;if(r.settings.brideName)D.s.bn=r.settings.brideName;}if(r.seserahan&&r.seserahan.length>0)D.ss=r.seserahan;if(r.administrasi&&r.administrasi.length>0)D.ad=r.administrasi;if(r.budgets&&r.budgets.length>0)D.bg=r.budgets;if(r.vendors&&r.vendors.length>0)D.vd=r.vendors;if(r.todos&&r.todos.length>0)D.td=r.todos;if(r.guests&&r.guests.length>0)D.gs=r.guests;if(r.rundowns&&r.rundowns.length>0)D.rd=r.rundowns;sv();dash();toast('Sync berhasil! ✨');}catch(e){toast('Error: '+e.message);}}).withFailureHandler(function(e){toast('Error: '+e.message);}).syncFromSpreadsheet();}
+    .li:hover {
+      border-color: var(--g4);
+      background: var(--g6)
+    }
 
-function expD(){var b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='wedding-'+new Date().toISOString().split('T')[0]+'.json';a.click();}
-function clrD(){if(!confirm('Hapus SEMUA data?'))return;D.bg=[];D.vd=[];D.td=[];D.gs=[];D.rd=[];D.mb=[];D.mn=[];D.ss=[];D.ad=[];D.pw=[];sv();dash();toast('Data dihapus.');}
+    .li.done {
+      opacity: .5
+    }
 
-function gv(id){return document.getElementById(id).value||'';}
-function gn(id){return parseFloat(document.getElementById(id).value)||0;}
-function cl(id){document.getElementById(id).value='';}
-function fc(v){return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(v||0);}
-function fd(d){if(!d)return'';try{return new Date(d).toLocaleDateString('id-ID',{year:'numeric',month:'short',day:'numeric'});}catch(e){return d;}}
-function toast(m){var t=document.getElementById('tst');t.textContent=m;t.className='toast show';setTimeout(function(){t.className='toast'},3000);}
+    .li.done .li-text {
+      text-decoration: line-through
+    }
 
-// Color picker listeners
-document.getElementById('pc').addEventListener('change',function(){D.s.pc=this.value;document.getElementById('pcc').textContent=this.value;sv();});
-document.getElementById('sc').addEventListener('change',function(){D.s.sc=this.value;document.getElementById('scc').textContent=this.value;sv();});
-document.getElementById('ac').addEventListener('change',function(){D.s.ac=this.value;document.getElementById('acc').textContent=this.value;sv();});
-</script>
+    .li input[type=checkbox] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--g3);
+      cursor: pointer
+    }
+
+    .li-content {
+      flex: 1;
+      min-width: 0
+    }
+
+    .li-text {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px
+    }
+
+    .li-meta {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .li-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 700
+    }
+
+    .li-badge.hi {
+      background: #fee;
+      color: #c44
+    }
+
+    .li-badge.md {
+      background: #fef3e0;
+      color: #a67c00
+    }
+
+    .li-badge.lo {
+      background: var(--g6);
+      color: var(--g3)
+    }
+
+    /* GRID CARDS */
+    .gcards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px
+    }
+
+    .gc {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      transition: all .2s
+    }
+
+    .gc:hover {
+      border-color: var(--g4);
+      background: var(--g6)
+    }
+
+    .gc h4 {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .gc p {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .gc .xb {
+      margin-top: 6px
+    }
+
+    /* MOODBOARD */
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px
+    }
+
+    .mood-item {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1;
+      cursor: pointer;
+      transition: transform .2s
+    }
+
+    .mood-item:hover {
+      transform: scale(1.03)
+    }
+
+    .mood-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .mood-item .xb {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(0, 0, 0, .6);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    /* COLOR PICKER */
+    .cpick {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap
+    }
+
+    .cpick-item {
+      text-align: center
+    }
+
+    .cpick-item input[type=color] {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      padding: 2px
+    }
+
+    .cpick-item span {
+      display: block;
+      font-size: 9px;
+      font-family: monospace;
+      color: var(--muted);
+      margin-top: 4px
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--g1);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0;
+      transition: all .3s;
+      transform: translateY(10px);
+      z-index: 9999
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* PAGES */
+    .pg {
+      display: none
+    }
+
+    .pg.on {
+      display: block
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:600px) {
+      .app{flex-direction:column}
+      .side{position:fixed;bottom:0;top:auto;left:0;right:0;width:100%!important;height:56px;flex-direction:row;justify-content:space-around;padding:4px 2px;gap:0;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.12);z-index:999;overflow-x:auto}
+      .side-logo{display:none}
+      .side a{width:30px;height:30px;font-size:13px;border-radius:8px;flex-shrink:0}
+      .side a .tip{display:none}
+      .main{margin-left:0!important;padding:14px 10px 72px 10px}
+      .main h1{font-size:18px}
+      .bento{grid-template-columns:1fr!important}
+      .bento-wide{grid-column:1!important}
+      .form-row{grid-template-columns:1fr!important}
+      .gcards{grid-template-columns:1fr!important}
+      .mood-grid{grid-template-columns:repeat(2,1fr)!important}
+      .card{padding:12px}
+      .stat-num{font-size:16px}
+      .cpick{justify-content:center}
+      table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+      .li{padding:10px}
+      .btn{padding:8px 12px;font-size:11px}
+    }
+  </style>
+
+  <div class="app">
+    <nav class="side">
+      <div class="side-logo">💍</div>
+      <a class="on" onclick="go('dashboard')">📊<span class="tip">Dashboard</span></a>
+      <a onclick="go('moodboard')">🎨<span class="tip">Moodboard</span></a>
+      <a onclick="go('menu')">🍽️<span class="tip">Menu</span></a>
+      <a onclick="go('budgeting')">💰<span class="tip">Budget</span></a>
+      <a onclick="go('vendors')">👥<span class="tip">Vendor</span></a>
+      <a onclick="go('todo')">✓<span class="tip">To-Do</span></a>
+      <a onclick="go('guests')">👫<span class="tip">Tamu</span></a>
+      <a onclick="go('rundown')">⏱️<span class="tip">Rundown</span></a>
+      <a onclick="go('seserahan')">🎁<span class="tip">Seserahan</span></a>
+      <a onclick="go('admin')">📋<span class="tip">Administrasi</span></a>
+      <a onclick="go('post')">🎉<span class="tip">Post Wedding</span></a>
+      <a onclick="go('settings')">⚙️<span class="tip">Pengaturan</span></a>
+    </nav>
+    <div class="main">
+
+      <!-- DASHBOARD -->
+      <div id="dashboard" class="pg on">
+        <h1>Dashboard ✨</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">👰</div>
+              <div>
+                <div class="card-title" id="bN">-</div>
+                <div class="card-subtitle">Pengantin Wanita</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">🤵</div>
+              <div>
+                <div class="card-title" id="gN">-</div>
+                <div class="card-subtitle">Pengantin Pria</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">📅</div>
+              <div>
+                <div class="card-title" id="wD">-</div>
+                <div class="card-subtitle">Tanggal</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">📍</div>
+              <div>
+                <div class="card-title" id="wL">-</div>
+                <div class="card-subtitle">Lokasi</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="tB">Rp 0</div>
+                <div class="stat-lbl">Total Budget</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="tS">Rp 0</div>
+                <div class="stat-lbl">Pengeluaran</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="tG">0</div>
+                <div class="stat-lbl">Total Tamu</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="tC">0/0</div>
+                <div class="stat-lbl">Task Selesai</div>
+              </div>
+            </div>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📈</div>
+              <div>
+                <div class="card-title">Progress Persiapan</div>
+                <div class="card-subtitle" id="pP">0%</div>
+              </div>
+            </div>
+            <div class="prog">
+              <div class="prog-fill" id="oP" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOODBOARD -->
+      <div id="moodboard" class="pg">
+        <h1>Moodboard & Warna 🎨</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">🎨</div>
+              <div>
+                <div class="card-title">Warna Tema</div>
+              </div>
+            </div>
+            <div class="cpick">
+              <div class="cpick-item"><input type="color" id="pc" value="#5B8C5A"><span id="pcc">#5B8C5A</span></div>
+              <div class="cpick-item"><input type="color" id="sc" value="#88B788"><span id="scc">#88B788</span></div>
+              <div class="cpick-item"><input type="color" id="ac" value="#3D6B3D"><span id="acc">#3D6B3D</span></div>
+            </div>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">🖼️</div>
+              <div>
+                <div class="card-title">Moodboard</div>
+              </div>
+            </div>
+            <div id="mbG" class="mood-grid"></div><button class="btn btn-p" onclick="addMB()" style="margin-top:10px">+
+              Tambah Gambar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENU -->
+      <div id="menu" class="pg">
+        <h1>Menu Catering 🍽️</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Menu</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="mnN" placeholder="Nama Menu"></div>
+              <div class="field"><select id="mnC">
+                  <option value="">Kategori</option>
+                  <option>Appetizer</option>
+                  <option>Main Course</option>
+                  <option>Dessert</option>
+                  <option>Minuman</option>
+                  <option>Snack</option>
+                </select></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="number" id="mnQ" placeholder="Jumlah Porsi"></div>
+            </div>
+            <div class="field"><textarea id="mnNo" placeholder="Catatan"></textarea></div><button class="btn btn-p"
+              onclick="aMn()">Tambah</button>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📋</div>
+              <div>
+                <div class="card-title">Daftar Menu</div>
+              </div>
+            </div>
+            <div id="mnL" class="gcards"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUDGETING -->
+      <div id="budgeting" class="pg">
+        <h1>Budgeting 💰</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Biaya</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="bgN" placeholder="Kategori"></div>
+              <div class="field"><input type="number" id="bgB" placeholder="Budget"></div>
+              <div class="field"><input type="number" id="bgA" placeholder="Aktual"></div>
+            </div><button class="btn btn-p" onclick="aBg()">Tambah</button>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="sB">Rp 0</div>
+                <div class="stat-lbl">Budget</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="sS">Rp 0</div>
+                <div class="stat-lbl">Pengeluaran</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="sR">Rp 0</div>
+                <div class="stat-lbl">Sisa</div>
+              </div>
+            </div>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📊</div>
+              <div>
+                <div class="card-title">Detail Budget</div>
+              </div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Kategori</th>
+                  <th>Budget</th>
+                  <th>Aktual</th>
+                  <th>Sisa</th>
+                  <th>%</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="bgT"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- VENDORS -->
+      <div id="vendors" class="pg">
+        <h1>Vendor List 👥</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Vendor</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="vdN" placeholder="Nama Vendor"></div>
+              <div class="field"><select id="vdC">
+                  <option value="">Kategori</option>
+                  <option>Fotografi</option>
+                  <option>Videografi</option>
+                  <option>Catering</option>
+                  <option>Dekorasi</option>
+                  <option>Makeup</option>
+                  <option>Venue</option>
+                  <option>Undangan</option>
+                  <option>Entertainment</option>
+                  <option>Lainnya</option>
+                </select></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="tel" id="vdP" placeholder="Telepon"></div>
+              <div class="field"><input type="number" id="vdCo" placeholder="Biaya"></div>
+            </div><button class="btn btn-p" onclick="aVd()">Tambah</button>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📋</div>
+              <div>
+                <div class="card-title">Daftar Vendor</div>
+              </div>
+            </div>
+            <div id="vdL" class="gcards"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO -->
+      <div id="todo" class="pg">
+        <h1>To-Do List ✓</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Task</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="tdD" placeholder="Deskripsi"></div>
+              <div class="field"><select id="tdC">
+                  <option value="">Kategori</option>
+                  <option>Persiapan</option>
+                  <option>Vendor</option>
+                  <option>Tamu</option>
+                  <option>Dekorasi</option>
+                  <option>Dokumen</option>
+                  <option>Lainnya</option>
+                </select></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="date" id="tdDt"></div>
+              <div class="field"><select id="tdP">
+                  <option value="Rendah">Rendah</option>
+                  <option value="Sedang">Sedang</option>
+                  <option value="Tinggi">Tinggi</option>
+                </select></div>
+            </div><button class="btn btn-p" onclick="aTd()">Tambah</button>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📋</div>
+              <div>
+                <div class="card-title">Daftar Task</div>
+              </div>
+            </div>
+            <div id="tdL"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GUESTS -->
+      <div id="guests" class="pg">
+        <h1>Tamu & Undangan 👫</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Tamu</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="gsN" placeholder="Nama"></div>
+              <div class="field"><select id="gsS">
+                  <option value="">Pihak</option>
+                  <option value="Pria">Pria</option>
+                  <option value="Wanita">Wanita</option>
+                  <option value="Keluarga">Keluarga</option>
+                </select></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="tel" id="gsP" placeholder="Telepon"></div>
+              <div class="field"><select id="gsSt">
+                  <option>Belum Diundang</option>
+                  <option>Diundang</option>
+                  <option>Konfirmasi</option>
+                  <option>Hadir</option>
+                  <option>Tidak Hadir</option>
+                </select></div>
+            </div><button class="btn btn-p" onclick="aGs()">Tambah</button>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="gT">0</div>
+                <div class="stat-lbl">Total</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="gC">0</div>
+                <div class="stat-lbl">Konfirmasi</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div>
+                <div class="stat-num" id="gP">0</div>
+                <div class="stat-lbl">Pending</div>
+              </div>
+            </div>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📋</div>
+              <div>
+                <div class="card-title">Daftar Tamu</div>
+              </div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Pihak</th>
+                  <th>Telepon</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="gsT"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- RUNDOWN -->
+      <div id="rundown" class="pg">
+        <h1>Rundown Acara ⏱️</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Acara</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="rdN" placeholder="Nama Acara"></div>
+              <div class="field"><input type="time" id="rdT"></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="rdL" placeholder="Lokasi"></div>
+              <div class="field"><input type="text" id="rdP" placeholder="PIC"></div>
+            </div>
+            <div class="field"><textarea id="rdNo" placeholder="Catatan"></textarea></div><button class="btn btn-p"
+              onclick="aRd()">Tambah</button>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📋</div>
+              <div>
+                <div class="card-title">Timeline</div>
+              </div>
+            </div>
+            <div id="rdLi"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESERAHAN -->
+      <div id="seserahan" class="pg">
+        <h1>List Seserahan 🎁</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Seserahan</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="ssN" placeholder="Nama Item"></div>
+              <div class="field"><select id="ssS">
+                  <option value="">Dari Pihak</option>
+                  <option value="Pria ke Wanita">Pria ke Wanita</option>
+                  <option value="Wanita ke Pria">Wanita ke Pria</option>
+                </select></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="number" id="ssCo" placeholder="Estimasi Biaya"></div>
+            </div>
+            <div class="field"><textarea id="ssNo" placeholder="Catatan"></textarea></div><button class="btn btn-p"
+              onclick="aSs()">Tambah</button>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">📋</div>
+              <div>
+                <div class="card-title">Daftar Seserahan</div>
+              </div>
+            </div>
+            <div id="ssL" class="gcards"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN -->
+      <div id="admin" class="pg">
+        <h1>Check Administrasi 📋</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Dokumen</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="adN" placeholder="Nama Dokumen"></div>
+              <div class="field"><select id="adC">
+                  <option value="">Kategori</option>
+                  <option>KUA/Gereja</option>
+                  <option>Catatan Sipil</option>
+                  <option>Kesehatan</option>
+                  <option>Kependudukan</option>
+                  <option>Lainnya</option>
+                </select></div>
+            </div>
+            <div class="field"><input type="date" id="adD"></div>
+            <div class="field"><textarea id="adNo" placeholder="Catatan"></textarea></div><button class="btn btn-p"
+              onclick="aAd()">Tambah</button>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">✅</div>
+              <div>
+                <div class="card-title">Checklist Dokumen</div>
+              </div>
+            </div>
+            <div id="adL"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST WEDDING -->
+      <div id="post" class="pg">
+        <h1>Post Wedding 🎉</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <div>
+                <div class="card-title">Tambah Item</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><input type="text" id="pwN" placeholder="Deskripsi"></div>
+              <div class="field"><select id="pwC">
+                  <option value="">Kategori</option>
+                  <option>Ucapan Terima Kasih</option>
+                  <option>Ambil Foto/Video</option>
+                  <option>Honeymoon</option>
+                  <option>Kado/Amplop</option>
+                  <option>Lainnya</option>
+                </select></div>
+            </div>
+            <div class="field"><input type="date" id="pwD"></div>
+            <div class="field"><textarea id="pwNo" placeholder="Catatan"></textarea></div><button class="btn btn-p"
+              onclick="aPw()">Tambah</button>
+          </div>
+          <div class="card bento-wide">
+            <div class="card-header">
+              <div class="card-icon">✅</div>
+              <div>
+                <div class="card-title">Checklist Post Wedding</div>
+              </div>
+            </div>
+            <div id="pwL"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="settings" class="pg">
+        <h1>Pengaturan ⚙️</h1>
+        <div class="bento">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">💒</div>
+              <div>
+                <div class="card-title">Informasi Pernikahan</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Pengantin Pria</label><input type="text" id="stG"></div>
+              <div class="field"><label>Pengantin Wanita</label><input type="text" id="stB"></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Tanggal</label><input type="date" id="stD"></div>
+              <div class="field"><label>Lokasi</label><input type="text" id="stL"></div>
+            </div>
+            <div class="field"><label>Total Budget</label><input type="number" id="stBg"></div><button class="btn btn-p"
+              onclick="aSt()">💾 Simpan</button>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">🔄</div>
+              <div>
+                <div class="card-title">Sync dari Spreadsheet</div>
+                <div class="card-subtitle">Import data dari Google Sheets</div>
+              </div>
+            </div><button class="btn btn-p" onclick="syncSheet()">🔄 Sync Sekarang</button>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">💾</div>
+              <div>
+                <div class="card-title">Data Management</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-s" onclick="expD()">📥 Export
+                JSON</button><button class="btn btn-d" onclick="clrD()">🗑️ Hapus Semua</button></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="toast" id="tst"></div>
+
+  <script>
+    var D = { s: { gn: '', bn: '', wd: '', wl: '', tb: 0, pc: '#5B8C5A', sc: '#88B788', ac: '#3D6B3D' }, bg: [], vd: [], td: [], gs: [], rd: [], mb: [], mn: [], ss: [], ad: [], pw: [] };
+    window.onload = function () { ld(); dash(); };
+
+    function go(p) { document.querySelectorAll('.pg').forEach(function (x) { x.className = 'pg' }); document.getElementById(p).className = 'pg on'; document.querySelectorAll('.side a').forEach(function (a) { a.className = '' }); if (event && event.target) { var t = event.target.closest('a'); if (t) t.className = 'on'; } if (p === 'dashboard') dash(); if (p === 'budgeting') sBg(); if (p === 'vendors') sVd(); if (p === 'todo') sTd(); if (p === 'guests') sGs(); if (p === 'rundown') sRd(); if (p === 'moodboard') sMb(); if (p === 'settings') sSt(); if (p === 'menu') sMn(); if (p === 'seserahan') sSs(); if (p === 'admin') sAd(); if (p === 'post') sPw(); }
+
+    function dash() { document.getElementById('gN').textContent = D.s.gn || '-'; document.getElementById('bN').textContent = D.s.bn || '-'; document.getElementById('wD').textContent = fd(D.s.wd) || '-'; document.getElementById('wL').textContent = D.s.wl || '-'; var tb = D.bg.reduce(function (a, b) { return a + (b.b || 0) }, 0); var ts = D.bg.reduce(function (a, b) { return a + (b.a || 0) }, 0); var dn = D.td.filter(function (t) { return t.d }).length; document.getElementById('tB').textContent = fc(tb); document.getElementById('tS').textContent = fc(ts); document.getElementById('tG').textContent = D.gs.length; document.getElementById('tC').textContent = dn + '/' + D.td.length; var pct = D.td.length > 0 ? (dn / D.td.length) * 100 : 0; document.getElementById('oP').style.width = pct + '%'; document.getElementById('pP').textContent = Math.round(pct) + '%'; }
+
+    function aBg() { var n = gv('bgN'); if (!n) return; D.bg.push({ id: Date.now(), n: n, b: gn('bgB'), a: gn('bgA') }); sv(); sBg(); cl('bgN'); cl('bgB'); cl('bgA'); }
+    function sBg() { var t = document.getElementById('bgT'); t.innerHTML = ''; var tb = 0, ts = 0; D.bg.forEach(function (b) { tb += b.b; ts += b.a; var p = b.b > 0 ? Math.round(b.a / b.b * 100) : 0; t.innerHTML += '<tr><td>' + b.n + '</td><td>' + fc(b.b) + '</td><td>' + fc(b.a) + '</td><td>' + fc(b.b - b.a) + '</td><td>' + p + '%</td><td><button class="btn btn-d btn-sm" onclick="dBg(' + b.id + ')">×</button></td></tr>' }); document.getElementById('sB').textContent = fc(tb); document.getElementById('sS').textContent = fc(ts); document.getElementById('sR').textContent = fc(tb - ts); }
+    function dBg(id) { if (!confirm('Hapus?')) return; D.bg = D.bg.filter(function (b) { return b.id !== id }); sv(); sBg(); }
+
+    function aVd() { var n = gv('vdN'); if (!n) return; D.vd.push({ id: Date.now(), n: n, c: gv('vdC'), p: gv('vdP'), co: gn('vdCo') }); sv(); sVd(); cl('vdN'); cl('vdP'); cl('vdCo'); }
+    function sVd() { var l = document.getElementById('vdL'); l.innerHTML = ''; D.vd.forEach(function (v) { l.innerHTML += '<div class="gc"><h4>' + v.n + '</h4><p>' + v.c + (v.p ? ' · 📞' + v.p : '') + (v.co > 0 ? ' · ' + fc(v.co) : '') + '</p><button class="btn btn-d btn-sm xb" onclick="dVd(' + v.id + ')">Hapus</button></div>' }); }
+    function dVd(id) { if (!confirm('Hapus?')) return; D.vd = D.vd.filter(function (v) { return v.id !== id }); sv(); sVd(); }
+
+    function aTd() { var d = gv('tdD'); if (!d) return; D.td.push({ id: Date.now(), ds: d, c: gv('tdC'), dt: gv('tdDt'), p: gv('tdP'), d: false }); sv(); sTd(); dash(); cl('tdD'); cl('tdDt'); }
+    function sTd() { var l = document.getElementById('tdL'); l.innerHTML = ''; D.td.slice().sort(function (a, b) { return (a.dt || '').localeCompare(b.dt || '') }).forEach(function (t) { var bc = t.p === 'Tinggi' ? 'hi' : t.p === 'Sedang' ? 'md' : 'lo'; l.innerHTML += '<div class="li' + (t.d ? ' done' : '') + '"><input type="checkbox"' + (t.d ? ' checked' : '') + ' onchange="tTd(' + t.id + ')"><div class="li-content"><div class="li-text">' + t.ds + '</div><div class="li-meta">' + t.c + ' · ' + fd(t.dt) + ' <span class="li-badge ' + bc + '">' + t.p + '</span></div></div><button class="btn btn-d btn-sm" onclick="dTd(' + t.id + ')">×</button></div>' }); }
+    function tTd(id) { var t = D.td.find(function (x) { return x.id === id }); if (t) { t.d = !t.d; sv(); sTd(); dash(); } }
+    function dTd(id) { if (!confirm('Hapus?')) return; D.td = D.td.filter(function (t) { return t.id !== id }); sv(); sTd(); dash(); }
+
+    function aGs() { var n = gv('gsN'); if (!n) return; D.gs.push({ id: Date.now(), n: n, s: gv('gsS'), p: gv('gsP'), st: gv('gsSt') }); sv(); sGs(); dash(); cl('gsN'); cl('gsP'); }
+    function sGs() { var t = document.getElementById('gsT'); t.innerHTML = ''; D.gs.forEach(function (g) { t.innerHTML += '<tr><td>' + g.n + '</td><td>' + g.s + '</td><td>' + g.p + '</td><td>' + g.st + '</td><td><button class="btn btn-d btn-sm" onclick="dGs(' + g.id + ')">×</button></td></tr>' }); var cf = D.gs.filter(function (g) { return g.st === 'Konfirmasi' || g.st === 'Hadir' }).length; document.getElementById('gT').textContent = D.gs.length; document.getElementById('gC').textContent = cf; document.getElementById('gP').textContent = D.gs.length - cf; }
+    function dGs(id) { if (!confirm('Hapus?')) return; D.gs = D.gs.filter(function (g) { return g.id !== id }); sv(); sGs(); dash(); }
+
+    function aRd() { var n = gv('rdN'); if (!n) return; D.rd.push({ id: Date.now(), n: n, t: gv('rdT'), l: gv('rdL'), p: gv('rdP'), no: gv('rdNo') }); sv(); sRd(); cl('rdN'); cl('rdT'); cl('rdL'); cl('rdP'); cl('rdNo'); }
+    function sRd() { var l = document.getElementById('rdLi'); l.innerHTML = ''; D.rd.slice().sort(function (a, b) { return (a.t || '').localeCompare(b.t || '') }).forEach(function (r) { l.innerHTML += '<div class="li"><div class="li-content"><div class="li-text"><span style="background:var(--g3);color:#fff;padding:2px 8px;border-radius:4px;font-size:10px;margin-right:8px">' + r.t + '</span>' + r.n + '</div><div class="li-meta">📍 ' + r.l + ' · 👤 ' + r.p + (r.no ? ' · ' + r.no : '') + '</div></div><button class="btn btn-d btn-sm" onclick="dRd(' + r.id + ')">×</button></div>' }); }
+    function dRd(id) { if (!confirm('Hapus?')) return; D.rd = D.rd.filter(function (r) { return r.id !== id }); sv(); sRd(); }
+
+    function sMb() { var g = document.getElementById('mbG'); g.innerHTML = ''; D.mb.forEach(function (m) { g.innerHTML += '<div class="mood-item"><img src="' + m.u + '" onerror="this.src=\'https://via.placeholder.com/150/c8ede0/2d5a3f?text=🌿\'"><button class="xb" onclick="dMb(' + m.id + ')">×</button></div>' }); }
+    function addMB() { var u = prompt('URL gambar:'); if (u) { D.mb.push({ id: Date.now(), u: u }); sv(); sMb(); } }
+    function dMb(id) { D.mb = D.mb.filter(function (m) { return m.id !== id }); sv(); sMb(); }
+
+    function aMn() { var n = gv('mnN'); if (!n) return; D.mn.push({ id: Date.now(), n: n, c: gv('mnC'), q: gn('mnQ'), no: gv('mnNo') }); sv(); sMn(); cl('mnN'); cl('mnQ'); cl('mnNo'); }
+    function sMn() { var l = document.getElementById('mnL'); l.innerHTML = ''; D.mn.forEach(function (m) { l.innerHTML += '<div class="gc"><h4>' + m.n + '</h4><p>' + m.c + (m.q ? ' · ' + m.q + ' porsi' : '') + (m.no ? ' · ' + m.no : '') + '</p><button class="btn btn-d btn-sm xb" onclick="dMn(' + m.id + ')">Hapus</button></div>' }); }
+    function dMn(id) { if (!confirm('Hapus?')) return; D.mn = D.mn.filter(function (m) { return m.id !== id }); sv(); sMn(); }
+
+    function aSs() { var n = gv('ssN'); if (!n) return; D.ss.push({ id: Date.now(), n: n, s: gv('ssS'), co: gn('ssCo'), no: gv('ssNo') }); sv(); sSs(); cl('ssN'); cl('ssCo'); cl('ssNo'); }
+    function sSs() { var l = document.getElementById('ssL'); l.innerHTML = ''; D.ss.forEach(function (s) { l.innerHTML += '<div class="gc"><h4>' + s.n + '</h4><p>' + s.s + (s.co > 0 ? ' · ' + fc(s.co) : '') + (s.no ? ' · ' + s.no : '') + '</p><button class="btn btn-d btn-sm xb" onclick="dSs(' + s.id + ')">Hapus</button></div>' }); }
+    function dSs(id) { if (!confirm('Hapus?')) return; D.ss = D.ss.filter(function (s) { return s.id !== id }); sv(); sSs(); }
+
+    function aAd() { var n = gv('adN'); if (!n) return; D.ad.push({ id: Date.now(), n: n, c: gv('adC'), dl: gv('adD'), no: gv('adNo'), d: false }); sv(); sAd(); cl('adN'); cl('adD'); cl('adNo'); }
+    function sAd() { var l = document.getElementById('adL'); l.innerHTML = ''; D.ad.forEach(function (a) { l.innerHTML += '<div class="li' + (a.d ? ' done' : '') + '"><input type="checkbox"' + (a.d ? ' checked' : '') + ' onchange="tAd(' + a.id + ')"><div class="li-content"><div class="li-text">' + a.n + '</div><div class="li-meta">' + a.c + (a.dl ? ' · 📅' + fd(a.dl) : '') + (a.no ? ' · ' + a.no : '') + '</div></div><button class="btn btn-d btn-sm" onclick="dAd(' + a.id + ')">×</button></div>' }); }
+    function tAd(id) { var a = D.ad.find(function (x) { return x.id === id }); if (a) { a.d = !a.d; sv(); sAd(); } }
+    function dAd(id) { if (!confirm('Hapus?')) return; D.ad = D.ad.filter(function (a) { return a.id !== id }); sv(); sAd(); }
+
+    function aPw() { var n = gv('pwN'); if (!n) return; D.pw.push({ id: Date.now(), n: n, c: gv('pwC'), dl: gv('pwD'), no: gv('pwNo'), d: false }); sv(); sPw(); cl('pwN'); cl('pwD'); cl('pwNo'); }
+    function sPw() { var l = document.getElementById('pwL'); l.innerHTML = ''; D.pw.forEach(function (p) { l.innerHTML += '<div class="li' + (p.d ? ' done' : '') + '"><input type="checkbox"' + (p.d ? ' checked' : '') + ' onchange="tPw(' + p.id + ')"><div class="li-content"><div class="li-text">' + p.n + '</div><div class="li-meta">' + p.c + (p.dl ? ' · 📅' + fd(p.dl) : '') + (p.no ? ' · ' + p.no : '') + '</div></div><button class="btn btn-d btn-sm" onclick="dPw(' + p.id + ')">×</button></div>' }); }
+    function tPw(id) { var p = D.pw.find(function (x) { return x.id === id }); if (p) { p.d = !p.d; sv(); sPw(); } }
+    function dPw(id) { if (!confirm('Hapus?')) return; D.pw = D.pw.filter(function (p) { return p.id !== id }); sv(); sPw(); }
+
+    function sSt() { document.getElementById('stG').value = D.s.gn; document.getElementById('stB').value = D.s.bn; document.getElementById('stD').value = D.s.wd; document.getElementById('stL').value = D.s.wl; document.getElementById('stBg').value = D.s.tb; document.getElementById('pc').value = D.s.pc; document.getElementById('sc').value = D.s.sc; document.getElementById('ac').value = D.s.ac; document.getElementById('pcc').textContent = D.s.pc; document.getElementById('scc').textContent = D.s.sc; document.getElementById('acc').textContent = D.s.ac; }
+    function aSt() { D.s.gn = gv('stG'); D.s.bn = gv('stB'); D.s.wd = gv('stD'); D.s.wl = gv('stL'); D.s.tb = gn('stBg'); sv(); dash(); toast('Tersimpan! ✨'); }
+
+    function sv() { var j = JSON.stringify(D); if (typeof google !== 'undefined' && google.script) { google.script.run.saveData(j); } else { localStorage.setItem('wp4', j); } }
+    function ld() { if (typeof google !== 'undefined' && google.script) { google.script.run.withSuccessHandler(function (j) { if (j) { try { Object.assign(D, JSON.parse(j)); dash(); } catch (e) { } } }).loadData(); } else { var s = localStorage.getItem('wp4'); if (s) { try { Object.assign(D, JSON.parse(s)); } catch (e) { } } } }
+
+    function syncSheet() { if (typeof google === 'undefined' || !google.script) { toast('Hanya di Google Apps Script'); return; } toast('Syncing...'); google.script.run.withSuccessHandler(function (json) { try { var r = JSON.parse(json); if (r.settings) { if (r.settings.groomName) D.s.gn = r.settings.groomName; if (r.settings.brideName) D.s.bn = r.settings.brideName; } if (r.seserahan && r.seserahan.length > 0) D.ss = r.seserahan; if (r.administrasi && r.administrasi.length > 0) D.ad = r.administrasi; if (r.budgets && r.budgets.length > 0) D.bg = r.budgets; if (r.vendors && r.vendors.length > 0) D.vd = r.vendors; if (r.todos && r.todos.length > 0) D.td = r.todos; if (r.guests && r.guests.length > 0) D.gs = r.guests; if (r.rundowns && r.rundowns.length > 0) D.rd = r.rundowns; sv(); dash(); toast('Sync berhasil! ✨'); } catch (e) { toast('Error: ' + e.message); } }).withFailureHandler(function (e) { toast('Error: ' + e.message); }).syncFromSpreadsheet(); }
+
+    function expD() { var b = new Blob([JSON.stringify(D, null, 2)], { type: 'application/json' }); var u = URL.createObjectURL(b); var a = document.createElement('a'); a.href = u; a.download = 'wedding-' + new Date().toISOString().split('T')[0] + '.json'; a.click(); }
+    function clrD() { if (!confirm('Hapus SEMUA data?')) return; D.bg = []; D.vd = []; D.td = []; D.gs = []; D.rd = []; D.mb = []; D.mn = []; D.ss = []; D.ad = []; D.pw = []; sv(); dash(); toast('Data dihapus.'); }
+
+    function gv(id) { return document.getElementById(id).value || ''; }
+    function gn(id) { return parseFloat(document.getElementById(id).value) || 0; }
+    function cl(id) { document.getElementById(id).value = ''; }
+    function fc(v) { return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(v || 0); }
+    function fd(d) { if (!d) return ''; try { return new Date(d).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }); } catch (e) { return d; } }
+    function toast(m) { var t = document.getElementById('tst'); t.textContent = m; t.className = 'toast show'; setTimeout(function () { t.className = 'toast' }, 3000); }
+
+    // Color picker listeners
+    document.getElementById('pc').addEventListener('change', function () { D.s.pc = this.value; document.getElementById('pcc').textContent = this.value; sv(); });
+    document.getElementById('sc').addEventListener('change', function () { D.s.sc = this.value; document.getElementById('scc').textContent = this.value; sv(); });
+    document.getElementById('ac').addEventListener('change', function () { D.s.ac = this.value; document.getElementById('acc').textContent = this.value; sv(); });
+  </script>
 </body>
+
 </html>

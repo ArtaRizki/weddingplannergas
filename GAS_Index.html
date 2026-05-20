@@ -15,16 +15,16 @@
     }
 
     :root {
-      --g1: #b56576;
-      --g2: #c77d8a;
-      --g3: #d4919e;
-      --g4: #e8b4bf;
-      --g5: #f5e0e5;
-      --g6: #fdf5f7;
-      --bg: #fdf8f9;
+      --g1: #e8a0b4;
+      --g2: #d88a9e;
+      --g3: #e8a0b4;
+      --g4: #f0c4d4;
+      --g5: #fce8ef;
+      --g6: #fff5f8;
+      --bg: #fff9fb;
       --card: #fff;
-      --text: #4a2c3d;
-      --muted: #9e7a85;
+      --text: #3d2833;
+      --muted: #b08a94;
       --border: rgba(255,107,179,.12);
       --radius: 16px;
       --radius-sm: 10px;
@@ -44,7 +44,7 @@
     }
 
     /* SIDEBAR */
-.side{background:linear-gradient(180deg,#b56576,#9d4a5a);display:flex;flex-direction:column;padding:18px 12px;gap:3px;position:fixed;width:200px;height:100vh;overflow-y:auto;z-index:100}
+.side{background:linear-gradient(180deg,#e8a0b4,#d88a9e);display:flex;flex-direction:column;padding:18px 12px;gap:3px;position:fixed;width:200px;height:100vh;overflow-y:auto;z-index:100}
 .side-logo{font-size:15px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.2);text-align:center;color:#fff;font-weight:700}
 .side a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:13px;text-decoration:none;transition:all .2s;cursor:pointer;color:rgba(255,255,255,.8);font-weight:500;white-space:nowrap}
 .side a:hover{background:rgba(255,255,255,.15);color:#fff}
@@ -246,7 +246,7 @@
 
     .btn-d {
       background: #f8e8ec;
-      color: #7a4a5e
+      color: #c07888
     }
 
     .btn-d:hover {
@@ -632,9 +632,9 @@ table{display:block;overflow-x:auto}
               </div>
             </div>
             <div class="cpick">
-              <div class="cpick-item"><input type="color" id="pc" value="#d4919e"><span id="pcc">#d4919e</span></div>
-              <div class="cpick-item"><input type="color" id="sc" value="#e8b4bf"><span id="scc">#e8b4bf</span></div>
-              <div class="cpick-item"><input type="color" id="ac" value="#9d4a5a"><span id="acc">#9d4a5a</span></div>
+              <div class="cpick-item"><input type="color" id="pc" value="#e8a0b4"><span id="pcc">#e8a0b4</span></div>
+              <div class="cpick-item"><input type="color" id="sc" value="#f0c4d4"><span id="scc">#f0c4d4</span></div>
+              <div class="cpick-item"><input type="color" id="ac" value="#d07a90"><span id="acc">#d07a90</span></div>
             </div>
           </div>
           <div class="card bento-wide">
@@ -1116,7 +1116,7 @@ table{display:block;overflow-x:auto}
   <div class="toast" id="tst"></div>
 
   <script>
-    var D = { s: { gn: '', bn: '', wd: '', wl: '', tb: 0, pc: '#d4919e', sc: '#e8b4bf', ac: '#9d4a5a' }, bg: [], vd: [], td: [], gs: [], rd: [], mb: [], mn: [], ss: [], ad: [], pw: [] };
+    var D = { s: { gn: '', bn: '', wd: '', wl: '', tb: 0, pc: '#e8a0b4', sc: '#f0c4d4', ac: '#d07a90' }, bg: [], vd: [], td: [], gs: [], rd: [], mb: [], mn: [], ss: [], ad: [], pw: [] };
     window.onload = function () { ld(); dash(); };
 
     function go(p) { document.querySelectorAll('.pg').forEach(function (x) { x.className = 'pg' }); document.getElementById(p).className = 'pg on'; document.querySelectorAll('.side a').forEach(function (a) { a.className = '' }); if (event && event.target) { var t = event.target.closest('a'); if (t) t.className = 'on'; } if (p === 'dashboard') dash(); if (p === 'budgeting') sBg(); if (p === 'vendors') sVd(); if (p === 'todo') sTd(); if (p === 'guests') sGs(); if (p === 'rundown') sRd(); if (p === 'moodboard') sMb(); if (p === 'settings') sSt(); if (p === 'menu') sMn(); if (p === 'seserahan') sSs(); if (p === 'admin') sAd(); if (p === 'post') sPw(); }

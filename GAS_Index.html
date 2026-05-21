@@ -905,6 +905,7 @@ table{display:block;overflow-x:auto}
                 <div class="card-title">Daftar Tamu</div>
               </div>
             </div>
+            <input type="text" id="gsQ" placeholder="🔍 Cari tamu..." oninput="filterGs()" style="margin-bottom:10px">
             <table>
               <thead>
                 <tr>
@@ -1129,7 +1130,7 @@ table{display:block;overflow-x:auto}
     function dBg(id) { if (!confirm('Hapus?')) return; D.bg = D.bg.filter(function (b) { return b.id !== id }); sv(); sBg(); }
 
     function aVd() { var n = gv('vdN'); if (!n) return; D.vd.push({ id: Date.now(), n: n, c: gv('vdC'), p: gv('vdP'), co: gn('vdCo') }); sv(); sVd(); cl('vdN'); cl('vdP'); cl('vdCo'); }
-    function sVd() { var l = document.getElementById('vdL'); l.innerHTML = ''; D.vd.forEach(function (v) { l.innerHTML += '<div class="gc"><h4>' + v.n + '</h4><p>' + v.c + (v.p ? ' · 📞' + v.p : '') + (v.co > 0 ? ' · ' + fc(v.co) : '') + '</p><button class="btn btn-d btn-sm xb" onclick="dVd(' + v.id + ')">Hapus</button></div>' }); }
+    function sVd() { var l = document.getElementById('vdL'); l.innerHTML = ''; D.vd.forEach(function (v) { l.innerHTML += '<div class="gc"><h4>' + v.n + '</h4><p>' + v.c + (v.p ? ' · 📞' + v.p : '') + (v.co > 0 ? ' · ' + fc(v.co) : '') + '</p><button class="btn btn-d btn-sm xb" onclick="eVd(' + v.id + ')">??</button> <button class="btn btn-d btn-sm xb" onclick="dVd(' + v.id + ')">�</button></div>' }); }
     function dVd(id) { if (!confirm('Hapus?')) return; D.vd = D.vd.filter(function (v) { return v.id !== id }); sv(); sVd(); }
 
     function aTd() { var d = gv('tdD'); if (!d) return; D.td.push({ id: Date.now(), ds: d, c: gv('tdC'), dt: gv('tdDt'), p: gv('tdP'), d: false }); sv(); sTd(); dash(); cl('tdD'); cl('tdDt'); }
@@ -1150,11 +1151,11 @@ table{display:block;overflow-x:auto}
     function dMb(id) { D.mb = D.mb.filter(function (m) { return m.id !== id }); sv(); sMb(); }
 
     function aMn() { var n = gv('mnN'); if (!n) return; D.mn.push({ id: Date.now(), n: n, c: gv('mnC'), q: gn('mnQ'), no: gv('mnNo') }); sv(); sMn(); cl('mnN'); cl('mnQ'); cl('mnNo'); }
-    function sMn() { var l = document.getElementById('mnL'); l.innerHTML = ''; D.mn.forEach(function (m) { l.innerHTML += '<div class="gc"><h4>' + m.n + '</h4><p>' + m.c + (m.q ? ' · ' + m.q + ' porsi' : '') + (m.no ? ' · ' + m.no : '') + '</p><button class="btn btn-d btn-sm xb" onclick="dMn(' + m.id + ')">Hapus</button></div>' }); }
+    function sMn() { var l = document.getElementById('mnL'); l.innerHTML = ''; D.mn.forEach(function (m) { l.innerHTML += '<div class="gc"><h4>' + m.n + '</h4><p>' + m.c + (m.q ? ' · ' + m.q + ' porsi' : '') + (m.no ? ' · ' + m.no : '') + '</p><button class="btn btn-d btn-sm xb" onclick="eMn(' + m.id + ')">??</button> <button class="btn btn-d btn-sm xb" onclick="dMn(' + m.id + ')">�</button></div>' }); }
     function dMn(id) { if (!confirm('Hapus?')) return; D.mn = D.mn.filter(function (m) { return m.id !== id }); sv(); sMn(); }
 
     function aSs() { var n = gv('ssN'); if (!n) return; D.ss.push({ id: Date.now(), n: n, s: gv('ssS'), co: gn('ssCo'), no: gv('ssNo') }); sv(); sSs(); cl('ssN'); cl('ssCo'); cl('ssNo'); }
-    function sSs() { var l = document.getElementById('ssL'); l.innerHTML = ''; D.ss.forEach(function (s) { l.innerHTML += '<div class="gc"><h4>' + s.n + '</h4><p>' + s.s + (s.co > 0 ? ' · ' + fc(s.co) : '') + (s.no ? ' · ' + s.no : '') + '</p><button class="btn btn-d btn-sm xb" onclick="dSs(' + s.id + ')">Hapus</button></div>' }); }
+    function sSs() { var l = document.getElementById('ssL'); l.innerHTML = ''; D.ss.forEach(function (s) { l.innerHTML += '<div class="gc"><h4>' + s.n + '</h4><p>' + s.s + (s.co > 0 ? ' · ' + fc(s.co) : '') + (s.no ? ' · ' + s.no : '') + '</p><button class="btn btn-d btn-sm xb" onclick="eSs(' + s.id + ')">??</button> <button class="btn btn-d btn-sm xb" onclick="dSs(' + s.id + ')">�</button></div>' }); }
     function dSs(id) { if (!confirm('Hapus?')) return; D.ss = D.ss.filter(function (s) { return s.id !== id }); sv(); sSs(); }
 
     function aAd() { var n = gv('adN'); if (!n) return; D.ad.push({ id: Date.now(), n: n, c: gv('adC'), dl: gv('adD'), no: gv('adNo'), d: false }); sv(); sAd(); cl('adN'); cl('adD'); cl('adNo'); }
@@ -1189,6 +1190,18 @@ table{display:block;overflow-x:auto}
     document.getElementById('pc').addEventListener('change', function () { D.s.pc = this.value; document.getElementById('pcc').textContent = this.value; sv(); });
     document.getElementById('sc').addEventListener('change', function () { D.s.sc = this.value; document.getElementById('scc').textContent = this.value; sv(); });
     document.getElementById('ac').addEventListener('change', function () { D.s.ac = this.value; document.getElementById('acc').textContent = this.value; sv(); });
+
+    // === EDIT FUNCTIONS ===
+    function eBg(id){var b=D.bg.find(function(x){return x.id===id});if(!b)return;var n=prompt('Kategori:',b.n);if(!n)return;var bg=prompt('Budget:',b.b);var ac=prompt('Aktual:',b.a);b.n=n;b.b=parseFloat(bg)||0;b.a=parseFloat(ac)||0;sv();sBg();}
+    function eVd(id){var v=D.vd.find(function(x){return x.id===id});if(!v)return;var n=prompt('Nama:',v.n);if(!n)return;var p=prompt('Telepon:',v.p);var co=prompt('Biaya:',v.co);v.n=n;v.p=p||'';v.co=parseFloat(co)||0;sv();sVd();}
+    function eTd(id){var t=D.td.find(function(x){return x.id===id});if(!t)return;var ds=prompt('Deskripsi:',t.ds);if(!ds)return;t.ds=ds;sv();sTd();}
+    function eGs(id){var g=D.gs.find(function(x){return x.id===id});if(!g)return;var n=prompt('Nama:',g.n);if(!n)return;var st=prompt('Status (Belum Diundang/Diundang/Konfirmasi/Hadir/Tidak Hadir):',g.st);g.n=n;g.st=st||g.st;sv();sGs();}
+    function eRd(id){var r=D.rd.find(function(x){return x.id===id});if(!r)return;var n=prompt('Nama Acara:',r.n);if(!n)return;var t=prompt('Waktu (HH:MM):',r.t);r.n=n;r.t=t||r.t;sv();sRd();}
+    function eSs(id){var s=D.ss.find(function(x){return x.id===id});if(!s)return;var n=prompt('Nama:',s.n);if(!n)return;var co=prompt('Biaya:',s.co);s.n=n;s.co=parseFloat(co)||0;sv();sSs();}
+    function eMn(id){var m=D.mn.find(function(x){return x.id===id});if(!m)return;var n=prompt('Nama Menu:',m.n);if(!n)return;var q=prompt('Porsi:',m.q);m.n=n;m.q=parseFloat(q)||0;sv();sMn();}
+
+    // === SEARCH/FILTER GUESTS ===
+    function filterGs(){var q=(document.getElementById('gsQ')||{}).value||'';q=q.toLowerCase();var t=document.getElementById('gsT');t.innerHTML='';D.gs.filter(function(g){return g.n.toLowerCase().indexOf(q)>=0||g.s.toLowerCase().indexOf(q)>=0||g.st.toLowerCase().indexOf(q)>=0}).forEach(function(g){t.innerHTML+='<tr><td>'+g.n+'</td><td>'+g.s+'</td><td>'+g.p+'</td><td>'+g.st+'</td><td><button class="btn btn-s btn-sm" onclick="eGs('+g.id+')">✏️</button> <button class="btn btn-d btn-sm" onclick="dGs('+g.id+')">×</button></td></tr>'});}
   </script>
 </body>
 

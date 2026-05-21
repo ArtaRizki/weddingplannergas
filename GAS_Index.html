@@ -28,7 +28,7 @@
       --border: rgba(255,107,179,.12);
       --radius: 16px;
       --radius-sm: 10px;
-      --shadow: 0 2px 12px rgba(26, 58, 42, .06)
+      --shadow: 0 2px 12px rgba(200,100,140,.06)
     }
 
     body {
@@ -59,11 +59,7 @@
       flex: 1
     }
 
-    .main h1 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: var(--g1)
+    .main h1 { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--text)
     }
 
     /* BENTO GRID */
@@ -89,7 +85,7 @@
 
     .card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26, 58, 42, .08)
+      box-shadow: 0 8px 24px rgba(200,100,140,.08)
     }
 
     .card-header {
@@ -231,7 +227,7 @@
     .btn-p:hover {
       background: var(--g2);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(74, 140, 106, .25)
+      box-shadow: 0 4px 12px rgba(200,100,140,.2)
     }
 
     .btn-s {
@@ -537,6 +533,11 @@ table{display:block;overflow-x:auto}
       <div id="dashboard" class="pg on">
         <h1>Dashboard ✨</h1>
         <div class="bento">
+          <div class="card bento-wide" id="countdownCard" style="background:linear-gradient(135deg,var(--g4),var(--g5));text-align:center;padding:24px">
+            <div style="font-size:14px;font-weight:600;color:var(--g2);margin-bottom:4px">Menuju Hari Bahagia</div>
+            <div id="countdown" style="font-size:32px;font-weight:800;color:var(--text)">-</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">hari lagi ✨</div>
+          </div>
           <div class="card">
             <div class="card-header">
               <div class="card-icon">👰</div>
@@ -1121,7 +1122,7 @@ table{display:block;overflow-x:auto}
 
     function go(p) { document.querySelectorAll('.pg').forEach(function (x) { x.className = 'pg' }); document.getElementById(p).className = 'pg on'; document.querySelectorAll('.side a').forEach(function (a) { a.className = '' }); if (event && event.target) { var t = event.target.closest('a'); if (t) t.className = 'on'; } if (p === 'dashboard') dash(); if (p === 'budgeting') sBg(); if (p === 'vendors') sVd(); if (p === 'todo') sTd(); if (p === 'guests') sGs(); if (p === 'rundown') sRd(); if (p === 'moodboard') sMb(); if (p === 'settings') sSt(); if (p === 'menu') sMn(); if (p === 'seserahan') sSs(); if (p === 'admin') sAd(); if (p === 'post') sPw(); }
 
-    function dash() { document.getElementById('gN').textContent = D.s.gn || '-'; document.getElementById('bN').textContent = D.s.bn || '-'; document.getElementById('wD').textContent = fd(D.s.wd) || '-'; document.getElementById('wL').textContent = D.s.wl || '-'; var tb = D.bg.reduce(function (a, b) { return a + (b.b || 0) }, 0); var ts = D.bg.reduce(function (a, b) { return a + (b.a || 0) }, 0); var dn = D.td.filter(function (t) { return t.d }).length; document.getElementById('tB').textContent = fc(tb); document.getElementById('tS').textContent = fc(ts); document.getElementById('tG').textContent = D.gs.length; document.getElementById('tC').textContent = dn + '/' + D.td.length; var pct = D.td.length > 0 ? (dn / D.td.length) * 100 : 0; document.getElementById('oP').style.width = pct + '%'; document.getElementById('pP').textContent = Math.round(pct) + '%'; }
+    function dash() { document.getElementById('gN').textContent = D.s.gn || '-'; document.getElementById('bN').textContent = D.s.bn || '-'; document.getElementById('wD').textContent = fd(D.s.wd) || '-'; document.getElementById('wL').textContent = D.s.wl || '-'; var tb = D.bg.reduce(function (a, b) { return a + (b.b || 0) }, 0); var ts = D.bg.reduce(function (a, b) { return a + (b.a || 0) }, 0); var dn = D.td.filter(function (t) { return t.d }).length; document.getElementById('tB').textContent = fc(tb); document.getElementById('tS').textContent = fc(ts); document.getElementById('tG').textContent = D.gs.length; document.getElementById('tC').textContent = dn + '/' + D.td.length; var pct = D.td.length > 0 ? (dn / D.td.length) * 100 : 0; document.getElementById('oP').style.width = pct + '%'; document.getElementById('pP').textContent = Math.round(pct) + '%'; var cd=document.getElementById('countdown');var cc=document.getElementById('countdownCard');if(D.s.wd){var diff=Math.ceil((new Date(D.s.wd)-new Date())/(1000*60*60*24));if(diff>0){cd.textContent=diff;cc.style.display='block';}else if(diff===0){cd.textContent='Hari Ini!';cc.style.display='block';}else{cd.textContent='Sudah Lewat';cc.style.display='block';}}else{cc.style.display='none';} }
 
     function aBg() { var n = gv('bgN'); if (!n) return; D.bg.push({ id: Date.now(), n: n, b: gn('bgB'), a: gn('bgA') }); sv(); sBg(); cl('bgN'); cl('bgB'); cl('bgA'); }
     function sBg() { var t = document.getElementById('bgT'); t.innerHTML = ''; var tb = 0, ts = 0; D.bg.forEach(function (b) { tb += b.b; ts += b.a; var p = b.b > 0 ? Math.round(b.a / b.b * 100) : 0; t.innerHTML += '<tr><td>' + b.n + '</td><td>' + fc(b.b) + '</td><td>' + fc(b.a) + '</td><td>' + fc(b.b - b.a) + '</td><td>' + p + '%</td><td><button class="btn btn-d btn-sm" onclick="dBg(' + b.id + ')">×</button></td></tr>' }); document.getElementById('sB').textContent = fc(tb); document.getElementById('sS').textContent = fc(ts); document.getElementById('sR').textContent = fc(tb - ts); }

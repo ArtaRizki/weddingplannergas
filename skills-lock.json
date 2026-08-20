@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "skills": {
+    "api-design-patterns": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/api-design-patterns/SKILL.md",
+      "computedHash": "4c9048d7644cb28fcef996d042f9a8a4b6d5bd1131f40f720592b0247f1b928d"
+    },
+    "clean-code-principles": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/clean-code-principles/SKILL.md",
+      "computedHash": "2c78185e24e4c5f1cdb4c0e7b08f85d635609e868336481eaaad262c54bbe5f3"
+    },
+    "git-workflow": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/git-workflow/SKILL.md",
+      "computedHash": "f696d8bba311c55c16c95fe417af0b7a90596e5c90be995c82c0df4f2c879572"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "88ee50d100ae257005992819f12cd350198c150723f24fb8c78e9f87ba415095"
+    },
+    "laravel-best-practices": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-best-practices/SKILL.md",
+      "computedHash": "3f2351dc1821d430b6b58ce24175e0af11f5c11b234198bfc76a6702c05fe3ef"
+    },
+    "laravel-database-optimization": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-database-optimization/SKILL.md",
+      "computedHash": "7e00d33fe4259f2dfb2ba81ddfa3ff241d4bb1ea93fcb59073011ba3a05d15b2"
+    },
+    "laravel-owasp-security": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-owasp-security/SKILL.md",
+      "computedHash": "c8e335415263f9f7bb224f15f82dda0a6cdfc136538e3fbf6b0eb1928fa110b5"
+    },
+    "laravel-testing": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-testing/SKILL.md",
+      "computedHash": "1e827d6ea94dff65484bd2e8ed0f67547941ae288b47c2fe8e075179aca520b6"
+    },
+    "php-best-practices": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/php-best-practices/SKILL.md",
+      "computedHash": "4ec7edc12bdbaefe464715d0eedc14678696df4ae28d1cd32237827c735dd69c"
+    },
+    "tailwind-best-practices": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/tailwind-best-practices/SKILL.md",
+      "computedHash": "ee6787299efa53778918c98ce3e27485a721d6808d8b7973f77828e80d5674f7"
+    },
+    "testing-best-practices": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/testing-best-practices/SKILL.md",
+      "computedHash": "b5bfe4ebd7f8358601c2d30483f41ed5be81a8c2b2c7dcbea81c6b4db39ad461"
+    },
+    "web-design-guidelines": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "3d34b066b23d6072a22f136520b93fe89937e6cd4aa85937786159c705f2ecbe"
+    }
+  }
+}
